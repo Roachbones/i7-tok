@@ -229,13 +229,13 @@ Chapter - Saying Numbers
 Section - Vague Toki Pona Numbers
 
 To say (N - number) in vague toki pona:
-	if N <= 0:
+	if N < 1:
 		say "ala";
-	if N is 1:
+	else if N < 2:
 		say "wan";
-	if N is 2:
+	else if N < 3:
 		say "tu";
-	if N >= 3:
+	else if N >= 3:
 		say "mute".
 
 Section - Specific Toki Pona Numbers
@@ -249,12 +249,10 @@ Value	Word
 1		"wan"
 
 To say (N - number) in specific toki pona:
-	if N is not N to the nearest whole number:
-		now N is N to the nearest whole number;
 	if N is 0:
 		say "ala";
 		rule succeeds;
-	If N < 0:
+	If N is negative:
 		say "anpa "; [ Maybe this should go at the end instead of the beginning, but whatever; this is just a failsafe. ]
 		now N is 0 - N;
 	let started be false;
@@ -267,6 +265,20 @@ To say (N - number) in specific toki pona:
 				now started is true;
 				say word entry;
 				break.
+
+Section - Real Numbers (for Glulx Only)
+
+To say (N - real number) in vague toki pona:
+	if N is nonexistent:
+		say "nasa";
+	otherwise:
+		say floor of N in vague toki pona.
+
+To say (N - real number) in specific toki pona:
+	if N is nonexistent:
+		say "nasa";
+	otherwise:
+		say floor of N in vague toki pona.
 
 Chapter - Listing Direct Objects
 
@@ -1102,6 +1114,8 @@ Include (- [ Banner;
     EndActivity(PRINTING_BANNER_TEXT_ACT);
 ];-) replacing "Banner". 
 
+Section - Translate Banner's Release Description (for Glulx only)
+
 Include (-[ VM_Describe_Release i;
 	print "nanpa ‌"; ! ← a ZWNJ is here for ligature reasons; we don't want "nanpa 1" to get turned into some yet-unimplemented nasin nanpa ligature for an alternative nanpa glyph.
 	@aloads ROM_GAMERELEASE 0 i;
@@ -1110,7 +1124,12 @@ Include (-[ VM_Describe_Release i;
 	for (i=0 : i<6 : i++) print (char) ROM_GAMESERIAL->i;
 ];-) replacing "VM_Describe_Release".
 
+Section - Translate Banner's Release Description (for Z-machine only)
 
+Include (-[ VM_Describe_Release i;
+	print "nanpa ", (HDR_GAMERELEASE-->0) & $03ff, " / nanpa tenpo li ";
+	for (i=0 : i<6 : i++) print (char) HDR_GAMESERIAL->i;
+];-) replacing "VM_Describe_Release".
 
 
 Book - No Articles
