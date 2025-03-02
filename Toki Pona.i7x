@@ -2,27 +2,52 @@ Version 0.0.1 of Toki Pona by Vivian Rose begins here.
 
 "Translates the language of play to toki pona."
 
-Book - Translate Default Story Headline
+[Once https://github.com/ganelson/inform-evolution/blob/main/proposals/0016-language-extensions-reform.md is released, this should be converted to the new format for language extensions. Until then, it shall be an extension.]
 
-Section - Unindexed Standard Rules Variables for toki pona (in place of Section 7 - Unindexed Standard Rules variables -  in Standard Rules by Graham Nelson)
+Book - Translate Is-Usuallys
 
-[ As Sebastian Arg's Spanish translation puts it:
-	el 'is usually' no deja redefinir de nuevo por defecto las constantes, por lo que hay que hackearlo ]
+[ Here we override whole sections of the Standard Rules just to translate some "is usually" text. As Sebastian Arg's Spanish translation puts it, «el 'is usually' no deja redefinir de nuevo por defecto las constantes, por lo que hay que hackearlo».]
+
+Section - Override Default Story Headline (in place of Section 7 - Unindexed Standard Rules variables -  in Standard Rules by Graham Nelson)
 
 The story title, the story author, the story headline, the story genre, and the story description are text variables.
 The release number and the story creation year are number variables.
 
 The release number is usually 1.
 
-[ The story headline is the only part we're changing: ]
+[ The default story headline is the only part we're changing. ]
 The story headline is usually "musi".
 
 [ It seems reasonable to leave the default story genre untranslated, considering the documentation:
 	'The "story genre" … exists purely to help librarians. If it is at all possible to do so, authors are asked to use one of the following standard categories…'
-Emily Short defies this convention with Counterfeit Monkey's genre of "Espionage", but such an exceptional work may deserve its own shelf in the library anyway. ]
+Emily Short defies this convention with Counterfeit Monkey's genre of "Espionage", but such a great work may deserve its own shelf in the library anyway. ]
 The story genre is usually "Fiction".
 
 The story title variable translates into Inter as "Story".
+
+Section - Override Default Yourself Description (in place of Section 11 - People in Standard Rules by Graham Nelson)
+
+The specification of person is "Despite the name, not necessarily a human
+being, but anything animate enough to envisage having a conversation with, or
+bartering with."
+
+A person can be female or male. A person is usually male.
+A person can be neuter. A person is usually not neuter.
+
+A person has a number called carrying capacity.
+The carrying capacity of a person is usually 100.
+
+A person can be transparent. A person is always transparent.
+
+The yourself is an undescribed person. The yourself is proper-named.
+
+The yourself is privately-named.
+Understand "your former self" or "my former self" or "former self" or
+	"former" as yourself when the player is not yourself.
+
+The description of yourself is usually "sina pona." [This is the only changed line. "As good-looking as ever." → "sina pona."]
+
+The yourself object translates into Inter as "selfobj".
 
 Book - Understanding
 
@@ -130,15 +155,14 @@ Inside-going is an action applying to nothing. Understand "insa" as inside-going
 
 Section - Rename Directions
 
-[ We won't be using these directions since they don't have good toki pona translations. ]
-North, south, east, west, northeast, southeast, northwest, and southwest are privately-named.
-
-[ We limit ourselves to these four directions. ]
 Up, down, inside, and outside are privately-named.
 Understand "anpa" as down. The printed name of down is "anpa".
 Understand "insa" as inside. The printed name of inside is "insa".
 Understand "weka" as outside. The printed name of outside is "weka".
 Understand "sewi" as up. The printed name of up is "sewi".
+
+[ Cardinal directions don't have good toki pona translations. ]
+North, south, east, west, northeast, southeast, northwest, and southwest are privately-named.
 
 Chapter - Out Of World Actions
 
@@ -229,13 +253,13 @@ Chapter - Saying Numbers
 Section - Vague Toki Pona Numbers
 
 To say (N - number) in vague toki pona:
-	if N < 1:
+	if N <= 0:
 		say "ala";
-	else if N < 2:
+	else if N is 1:
 		say "wan";
-	else if N < 3:
+	else if N is 2:
 		say "tu";
-	else if N >= 3:
+	else:
 		say "mute".
 
 Section - Specific Toki Pona Numbers
@@ -253,7 +277,7 @@ To say (N - number) in specific toki pona:
 		say "ala";
 		rule succeeds;
 	If N is negative:
-		say "anpa "; [ Maybe this should go at the end instead of the beginning, but whatever; this is just a failsafe. ]
+		say "anpa "; [ Maybe this should go at the end instead of the beginning, but this is just a failsafe. ]
 		now N is 0 - N;
 	let started be false;
 	while N > 0:
@@ -265,20 +289,6 @@ To say (N - number) in specific toki pona:
 				now started is true;
 				say word entry;
 				break.
-
-Section - Real Numbers (for Glulx Only)
-
-To say (N - real number) in vague toki pona:
-	if N is nonexistent:
-		say "nasa";
-	otherwise:
-		say floor of N in vague toki pona.
-
-To say (N - real number) in specific toki pona:
-	if N is nonexistent:
-		say "nasa";
-	otherwise:
-		say floor of N in vague toki pona.
 
 Chapter - Listing Direct Objects
 
@@ -300,8 +310,9 @@ In logographic mode, no commas are used, and the list is indented, sort of like 
 	              e pan
 	              e poki telo. ]
 
-Use no commas for indirect objects translates as (- Constant TOK_OMIT_E_COMMAS; -).
 
+
+Use no commas for direct objects translates as (- Constant TOK_OMIT_EN_COMMAS; -).
 
 To say e (L - list of objects):
 	say "e ";
@@ -311,8 +322,8 @@ To say e (L - list of objects):
 	let commas needed be whether or not the number of entries in L > 2 and the no commas for direct objects option is inactive;
 	say L joined by "[if commas needed is true][comma][end if] [ilob]e ".
 
-Use no commas for direct objects translates as (- Constant TOK_OMIT_EN_COMMAS; -).
-	
+Use no commas for subjects translates as (- Constant TOK_OMIT_E_COMMAS; -).
+
 To say (L - list of objects) li:
 	if the number of entries in L is 1:
 		say entry 1 in L li;
@@ -324,7 +335,7 @@ To say (L - list of objects) as a/-- subject/subjects:
 	if the number of entries in L is 0:
 		say "ala";
 		rule succeeds;
-	let commas needed be whether or not the number of entries in L > 2 and the no commas for direct objects option is inactive;
+	let commas needed be whether or not the number of entries in L > 2 and the no commas for subjects option is inactive;
 	say L joined by "[if commas needed is true][comma][end if] en ".
 
 To say (L - list of objects) joined by (S - some text):
@@ -398,15 +409,11 @@ Array LanguagePronouns table
 
 Chapter - Descriptors
 
-[An aside: Adding rows for "lit" and "unlit" is probably more trouble than it's worth. Like quantifiers (or just ale), we'd have to have a rule to shift them before nouns. Like this: >JO E PALISA SUNO ALA (take unlit stick) → >JO E SUNO ALA PALISA. That's if having a space in the "unlit" word even works, and it doesn't, so only SUNO (lit) would work.
-Consider lipu pu's example of toki pona eliminating excess thoughts by phrasing "bad friend" as "toki pona ike", or "bad good person", which is clearly an oxymoron. Can't we apply the same lesson to an "unlit torch"? What is an unlit torch, really? It's a stick. A torch is a lit stick, or palisa suno. So whatever, we don't need those adjectives.] [TODO concision]
-
 Include (-
 Array LanguageDescriptors table
     'mi'      $$111111111111    POSSESS_PK      0
     'ona'     $$111111111111    POSSESS_PK      'ona';
 -) replacing "LanguageDescriptors".
-
 
 Chapter - Numbers
 
@@ -421,7 +428,7 @@ Chapter - Commands
 
 Section - LanguageVerb
 
-[This is so that if a player says "i asdasd" then they'll get a response like "I only understood you as far as wanting to take inventory." instead of "I only understood you as as far as wanting to i.".]
+[This is so that the command "i asdasd" gives a response like "I only understood you as far as wanting to take inventory." instead of "I only understood you as as far as wanting to i.".]
 Include (-
 [ LanguageVerb i;
     switch (i) {
@@ -525,7 +532,7 @@ This is the toki pona examine containers rule:
 	if the noun is a container:
 		if the noun is open or the noun is transparent:
 			if something described which is not scenery is in the noun and something which is not the player is in the noun:
-				dentally say "[noun] li jo " (A); [ dentally, to set ideographic indentation level ]
+				dentally say "[noun] li jo " (A);
 				list the contents of the noun, as a sentence, tersely, not listing concealed items;
 				say ".";
 				now examine text printed is true;
@@ -555,7 +562,7 @@ Before listing contents of a supporter (this is the reset en needed rule):
 	now en needed is false.
 Before printing the name of something (called the supportee to be named) while listing contents of a supporter (this is the en-prefix listed supportees rule):
 	if en needed is true:
-		say "[if current orthography is logographic] [end if]en " (A); [TODO why the space]
+		say "[if current orthography is logographic] [end if]en " (A);
 	otherwise:
 		now en needed is true.
 After listing contents of a supporter (called S) (this is the specify location after supportee lists rule): [TODO is this triggered too often?]
@@ -657,7 +664,7 @@ After reading a command (this is the ale shuffling rule):
 	[ We already added "ali" as ALL2__WD so it would be understood as "all", but let's replace it with ale anyway so that this next replacement is easier. ]
 	if the player's command includes "ali":
 		replace the matched text with "ale";
-	if the player's command includes "ale": [← Yes, we need this line; otherwise we mess up the parser's asking which noun when the player does not supply a noun. ]
+	if the player's command includes "ale": [← This line is necessary; otherwise we mess up the parser's asking which noun when the player does not supply a noun. ]
 		let T be "[the player's command]";
 		replace the regular expression "(.+) e (.+) ale" in T with "\1 e ALE \2";
 		change the text of the player's command to T.
@@ -710,7 +717,7 @@ Include (-
         #Ifnot;
         j = parse2-->0;
         #Endif;
-        if (j == 1) { ! ← Changed this from (j) to (j==1). Instead of checking if at least one word was entered, we ensure that *exactly* one word was entered. This way, a player who types "lon ala" will be asked to say just "lon" or "ala". This still isn't ideal, but it's better than interpreting "lon ala" as yes.
+        if (j == 1) { ! ← Changed this from (j) to (j==1). Instead of checking if at least one word was entered, we ensure that *exactly* one word was entered. This way, a player who types "lon ala" will be asked to say just "lon" or "ala". This still isn't ideal (it would be better to just interpret "lon ala" as no), but it's better than interpreting "lon ala" as yes.
             i = parse2-->1;
             if (i == YES1__WD or YES2__WD or YES3__WD) rtrue;
             if (i == NO1__WD or NO2__WD or NO3__WD) rfalse;
@@ -722,7 +729,7 @@ Include (-
 Book - Highlight Suggested Commands
 
 [ Lacking a storied history of toki pona text adventures, the player may struggle to intuit available commands. When suggesting a command to the player, highlighting it in the input style and prefixing it with the command prompt can help get the point across. This functionality isn't really specific to toki pona, but some of this extension's default response substitutions make use of it.
-If you don't like this style, replace this rule with one that says nothing. ]
+If you don't like this style, replace the following rule with one that says nothing. ]
 
 Section - Style Suggested Commands Like Input (for use with Glulx Text Effects by Emily Short)
 
@@ -772,7 +779,7 @@ To dentally say (T - some text):
 	if the current orthography is logographic:
 		now the current ideographic indentation level is the ideographic length of T.
 
-[ «seme» looks like a question mark already, so it can get confusing if you try to use question marks too. This phrase makes it easy to omit the question mark for 'anu seme' questions, like https://oddlingo.github.io/einstein.pdf ]
+[ «seme» looks like a question mark already, so it can get confusing if you try to use question marks too. This phrase makes it easy to omit the question mark for «anu seme» questions, like https://oddlingo.github.io/einstein.pdf ]
 To say ?: say optional question mark. To say optional question mark:
 	if the current orthography is alphabetic:
 		say "?[no line break]".
@@ -790,6 +797,14 @@ To say cilob:
 	say "[comma] [ilob]".
 
 Chapter - Cartouche Shorthand (for Glulx only)
+
+To say name -- beginning say_name_glyphs: (-
+	if ((+ the current orthography +) == (+ alphabetic +)) {
+		@setiosys 1 TOK_initials; ! Start filtering every character of output through TOK_initials
+	} else {
+		TEXT_TY_Say((+ "[cartouche]" +));
+	}
+-).
 
 Include (-
 	Global TOK_prev_char = 0;
@@ -809,93 +824,21 @@ Include (-
 	]
 -).
 
-To say name -- beginning say_name_glyphs: (-
-	if ((+ the current orthography +) == (+ alphabetic +)) {
-		@setiosys 1 TOK_initials;
-	} else {
-		TEXT_TY_Say((+ "[cartouche]" +));
-	}
--).
-
 To say end name -- ending say_name_glyphs: (-
 	if ((+ the current orthography +) == (+ alphabetic +)) {
-		@setiosys 2 0;
+		@setiosys 2 0; ! Stop filtering output through TOK_initials
 		TOK_prev_char = 0;
 	} else {
 		TEXT_TY_Say((+ "[end cartouche]" +));
 	}
 -).
 
-Chapter - Toggling Orthographical Features
-
-[ Commands to toggle sitelen pona, its long glyphs, and its compound glyphs, depending on the player's preference. ]
-
-Orthography toggling is an action out of world.
-Understand "sitelen" or "sitelen pona ala/--" or "sitelen Lasina/Latin ala/--" or "font" or "orthography" or "sp" or "sl" as orthography toggling.
-Carry out orthography toggling (this is the default orthography toggling rule):
-	if the current orthography is alphabetic:
-		now the current orthography is logographic;
-		now the command prompt is the appropriate command prompt;
-		say "tenpo ni la musi ni li toki kepeken[long glyph] sitelen[~]pona[end long glyph].[paragraph break]";
-		if glyph composition enabled is true:
-			say "[te]toki pona[to] li sama [te]toki[~]pona[to].[line break]
-			ni li ike [tawa] sina[ELG] la o [te][command style]sitelen tu[roman type][to].";
-		otherwise:
-			say "sitelen tu ken ala wan.[line break]
-			ni li ike [tawa] sina[ELG] la o [te][command style]sitelen tu[roman type][to].[paragraph break]";
-		if long glyphs enabled is true:
-			say "[te]kulupu pi waso lili li mu lon tomo waso.[to] li sama [te]kulupu [pi] waso lili[ELG] li mu [lon] tomo waso[ELG].[to].[line break]
-			ni li ike [tawa] sina[ELG] la[comma] o [te][command style]sitelen supa[roman type][to].";
-		otherwise:
-			say "sitelen ken ala supa.[line break]
-			ni li ike [tawa] sina[ELG] la[comma] o [te][command style]sitelen supa[roman type][to].";
-	otherwise:
-		now the current orthography is alphabetic;
-		now the command prompt is the appropriate command prompt;
-		say "tenpo ni la, musi ni li toki kepeken sitelen Lasina.".
-
-Long glyph toggling is an action out of world.
-Understand "sitelen palisa ala/--" as long glyph toggling.
-Carry out long glyph toggling (this is the default long glyph toggling rule):
-	if the current orthography is alphabetic:
-		say "sina ken ala ante e sitelen palisa tan ni: tenpo ni la, musi ni li kepeken sitelen Lasina.
-		
-		sina [te][command style]sitelen pona[roman type][to] la musi ni li kepeken sitelen pona.";
-	otherwise:
-		if long glyphs enabled is true:
-			now long glyphs enabled is false;
-			say "ante. tenpo ni la sitelen pi musi ni li ken ala palisa.";
-		otherwise:
-			now long glyphs enabled is true;
-			say "ante. tenpo ni la sitelen [pi] musi ni li ken palisa.
-			
-			[te]sitelen [pi] musi ni[ELG][to] li sama [te]sitelen pi musi ni[to].
-			[te]pipi li mu [lon] kasi[ELG][to] li sama [te]pipi li mu lon kasi[to].". [cuter examples?]
-			
-Glyph composition toggling is an action out of world.
-Understand "sitelen wan/tu" as glyph composition toggling.
-Carry out glyph composition toggling (this is the default glyph composition toggling rule):
-	if the current orthography is alphabetic:
-		say "[roman type]tenpo ni, musi ni li kepeken sitelen Lasina.
-		
-		sina [te][command style]sitelen pona[roman type][to] la musi ni kepeken sitelen pona.";
-	otherwise:
-		if glyph composition enabled is true:
-			now glyph composition enabled is false;
-			say "ante. tenpo ni la sitelen tu ken ala wan.
-			
-			[te]toki pona[to] li sitelen tu taso.";
-		otherwise:
-			now glyph composition enabled is true;
-			say "ante. tenpo ni la sitelen tu ken wan.
-			
-			[te]toki pona[to] li sama [te]toki[~]pona[to].".
 
 Chapter - Configuration Specific to the nasin nanpa Font
 
 Section - Ideographic Length
 
-[ Used for su-style indentation. Might need adjusted according to the font; a different font could, for example, render colons at half-width rather than full-width. ]
+[ For su-style indentation. Might need adjusted according to the font; a different font could, for example, render colons at half-width rather than full-width. ]
 
 To decide what number is the ideographic length of (T - some text):
 	[ Try to determine how long some text is in nasin nanpa.
@@ -1014,6 +957,31 @@ To say kala with eyes:
 		say "kala1".
 To say kala without eyes:
 	say "kala".
+
+Section - Symmetrize Obituary
+
+[Obituaries are usually printed *** like this ***, but nasin nanpa's ligatures consume the space before the second set of asterisks, so the sitelen pona ends up looking more *** like this***. Let's add a zero-width space after the obituary to make this prettier.]
+
+Include (-[ PRINT_OBITUARY_HEADLINE_R;
+    print "^^    ";
+    VM_Style(ALERT_VMSTY);
+    print "***";
+    if (deadflag == 1) PRINT_OBITUARY_HEADLINE_RM('A');
+    if (deadflag == 2) PRINT_OBITUARY_HEADLINE_RM('B');
+    if (deadflag == 3) PRINT_OBITUARY_HEADLINE_RM('C');
+    if (deadflag ~= 0 or 1 or 2 or 3)  {
+        print " ";
+        TEXT_TY_Say(deadflag);
+        if ((+ the current orthography +) == (+ logographic +)) {
+		print "​"; ! zero-width space
+	}
+        print " ";
+    }
+    print "***";
+    VM_Style(NORMAL_VMSTY);
+    print "^^^";
+    rfalse;
+];-) replacing "PRINT_OBITUARY_HEADLINE_R".
 	
 Chapter - Warn about unended long glyphs
 
@@ -1055,17 +1023,30 @@ Chapter - Localize Banner
 
 [ The pending version of Inform adds localization to the word “by” in the banner text, but v10.1.2 does not. To avoid compiling an unreleased version of Inform, we hack the banner to use «tan» instead of “by”. While we're at it, we fix the author name to render correctly in sitelen pona, and translate technical terms like “Serial Number”.]
 
-[ nasin nanpa does not play well with title case names when its ligatures are enabled. For example, "jan Wiwijen" gets rendered like "👤 Wiwi+". An author who has a sitelen pona spelling in mind for their name should provide a value for the "logographic story author" text, like this:
+[ nasin nanpa does not play well with title case names, attempting to render them as sitelen pona glyphs. For example, "jan Wiwijen" gets rendered like "👤 Wiwi+". To avoid this, an author who has a sitelen pona spelling in mind for their name should provide a value for the "logographic story author" text, like this:
 	
-	The logographic story author is usually "jan [cartouche]wan ijo wan ijo jaki en nanpa[end cartouche]".]
+	"anpa ma" by "jan Wiwijen"
+	
+	The logographic story author is "jan [cartouche]wan ijo wan ijo jaki en nanpa[end cartouche]".
+
+This functionality is also available for the story title, which should be used if it contains a name:
+	
+	"jan Osu pi wawa nasa" by jan Sonja
+	
+	The logographic story title is "jan [cartouche]o suli uta[end cartouche] pi wawa nasa".]
+
 The logographic story author is some text that varies.
+The logographic story title is some text that varies.
 
 Last when play begins when the logographic story author is "" (this is the uninitialized logographic author fallback rule):
 	[ The author should provide a value for the logographic story author text, but failing that, this rule attempts to generate a sensible one from the normal story author text.
-	Our author might be something like "jan Wiwijen". For this to display legibly in nasin nanpa, we turn it into "jan WIWIJEN". So, we turn all title-case words in the author name into all-caps.
+	For example, our author might be something like "jan Wiwijen". For this to display legibly in nasin nanpa, we turn it into "jan WIWIJEN". So, we all-capitalize any title-case words in the author name.
 	More specifically, we all-capitalize any word containing any character besides a lowercase toki pona letter. So "Helene von Breuning" would still get all-capitalized to "HELENE VON BREUNING". (This still lacks a headnoun, but at least it's legible in the logographic font.) ]
 	now the logographic story author is the story author;
 	replace the regular expression "\b\w*<^ptksmnljwaeiou\s>\w*\b" in the logographic story author with "\u0".
+
+Last when play begins when the logographic story title is "" (this is the uninitialized logographic story title fallback rule):
+	now the logographic story title is the story title.
 
 [ >VERSION and >TRANSCRIPT both output English-y text after the banner. Let's render that in the monospace font rather than nasin nanpa. ]
 After printing the banner text when the current action is requesting the story file version or the current action is switching the story transcript on (this is the print the version text in monospace instead of nasin nanpa rule):
@@ -1075,11 +1056,14 @@ After printing the banner text when the current action is requesting the story f
 Section - Banner Localization Internals - Unindexed
 
 The banner's author text is some text that varies.
-Before printing the banner text (this is the banner's authorial orthography rule):
+The banner's title text is some text that varies.
+Before printing the banner text (this is the banner orthography rule):
 	if the current orthography is alphabetic:
 		now the banner's author text is the story author;
+		now the banner's title text is the story title;
 	otherwise:
-		now the banner's author text is the logographic story author.
+		now the banner's author text is the logographic story author;
+		now the banner's title text is the logographic story title.
 
 The banner's Inform version style marker is some text that varies.
 Before printing the banner text (this is the print the Inform version in monospace instead of nasin nanpa rule):
@@ -1088,11 +1072,11 @@ Before printing the banner text (this is the print the Inform version in monospa
 	otherwise:
 		now the banner's Inform version style marker is "".
 
-Include (- [ Banner;
+Include (-[ Banner;
    BeginActivity(PRINTING_BANNER_TEXT_ACT);
    if (ForActivity(PRINTING_BANNER_TEXT_ACT) == false) {
 	   	VM_Style(HEADER_VMSTY);
-		TEXT_TY_Say(Story);
+		TEXT_TY_Say((+ banner's title text +));
 		VM_Style(NORMAL_VMSTY);
 		new_line;
 		TEXT_TY_Say(Headline);
@@ -1238,9 +1222,12 @@ The print protagonist internal rule response (B) is "[mi]". ["[ourselves]"]
 The print protagonist internal rule response (C) is "[mi]". ["[our] former self"]
 The standard implicit taking rule response (A) is "[paren]nanpa wan la [mi li] jo e [noun][close paren][command clarification break]". ["(first taking [the noun])[command clarification break]"]
 The standard implicit taking rule response (B) is "[paren]nanpa wan la [second noun li] jo e [noun][close paren][command clarification break]". ["([the second noun] first taking [the noun])[command clarification break]"]
+
+[ zero-width spaces in these for sitelen pona ]
 The print obituary headline rule response (A) is " [mi li] moli ". [" You have died "]
 The print obituary headline rule response (B) is " [mi li] pona ". [" You have won "]
 The print obituary headline rule response (C) is " pini ". [" The End "]
+
 The immediately undo rule response (A) is "sina ken ala monsi e tenpo [lon] musi ni[ELG].". ["The use of 'undo' is forbidden in this story."]
 The immediately undo rule response (B) is "sina ken ala monsi e tenpo ala!". ["You can't 'undo' what hasn't been done!"]
 The immediately undo rule response (C) is "ilo[~]nanpa sina li ken ala monsi e tenpo.". ["Your interpreter does not provide 'undo'. Sorry!"]
@@ -1552,7 +1539,6 @@ The block sleeping rule response (A) is "[mi li] wile ala lape.". ["[We] [aren't
 
 Book - Quotation Marks
 
-[TODO is there a way to make these more performant? `translates into unicode`? `is always`?]
 To say left double quote: say Unicode 8220.	To say right double quote: say Unicode 8221.
 To say left single quote: say Unicode 8216.	To say right single quote: say Unicode 8217.
 
@@ -1634,7 +1620,7 @@ html]
 
 	The initial appearance of the desk is "supa li suli. [lob]supa li jo [indenting 3][e list of for sale things on the desk].".
 
-Might say, depending on the things on the desk:
+might say, depending on what is on the desk:
 
 	supa li suli. supa li jo e kili, e pan, e poki telo.
 	supa li suli. supa li jo e kili e pan.
@@ -1680,12 +1666,30 @@ Section: Adapting text about the player
 
 The "[mi]" phrase is equivalent to [html<a href='https://ganelson.github.io/inform-website/book/WI_14_4.html'>Inform's "[we]" phrase</a>html][omit]Inform's "[we]" phrase (described in §14.4. Adapting text about the player)[/omit]. It prints either "mi", "sina", or "ona", depending on the story viewpoint. Unless you plan to switch the story viewpoint, you probably won't need this phrase.
 
-Chapter: Translated Responses
+
+Chapter: Other toki pona Considerations
+
+Section: Translated Responses
 
 This extension provides translations for default rule responses. You can view these in the extension source, or with the RESPONSES ALL command.[html See <a href="https://ganelson.github.io/inform-website/book/WI_14_10.html">§14.10. Responses</a> for how to override responses.html]
 
 The responses make heavy use of the "[mi li]" phrase, which is shorthand for "[the player li]", so it evaluates to "mi" or "sina" or "ona li", depending on the story viewpoint.
 
+
+Section: Consider Implementing These Actions
+
+The following verbs are not implemented by this extension, but are common enough that you should consider implementing them: [omit]kalama; mu; olin; toki; unpa; uta. ("uta olin e [thing]" is understood as kissing, and "uta pilin e [thing]" is understood as tasting, but just "uta e [thing]" could mean kissing or tasting or biting or something else, so it is left to the story author.)[/omit]
+
+[html
+<ul>
+<li>kalama
+<li>mu
+<li>olin
+<li>toki
+<li>unpa
+<li>uta. "uta olin e [thing]" is understood as kissing, and "uta pilin e [thing]" is understood as tasting, but just "uta e [thing]" could mean kissing or tasting or biting or something else, so its implementation is left to the story author.
+</ul>
+html]
 
 
 Chapter: Sitelen Pona
@@ -1701,7 +1705,7 @@ This extension's Toggling Orthographical Features chapter defines commands that 
 
 Section: Wait, how do we control which font is used?
 
-An Inform 7 story has no way of signaling a font preference to the interpreter. This extension assumes that some external mechanism ensures that the nasin nanpa font is used when `the current orthography is logographic`, and a more traditional font is used otherwise. Example TODO demonstrates how this might be achieved in a web interpreter using JavaScript. On other interpreters, the player will probably have to manually set the font to nasin nanpa, and the interpreter may not even be able to display it properly.
+An Inform 7 story has no way of signaling a font preference to the interpreter. This extension assumes that some external mechanism ensures that the nasin nanpa font is used when `the current orthography is logographic`, and a more traditional font is used otherwise. This can be achieved on a web interpreter like Bisquixe or Vorple using custom CSS. On other interpreters, the player will probably have to manually set the font to nasin nanpa, and even then, the interpreter may not be able to display it properly.
 
 
 
@@ -1716,12 +1720,12 @@ Or, to be concise:
 	The printed name of Counterfeit Monkey is "lipu [name]kama ante nimi toki anu pilin e[ideographic space]mani ale nimi kama ilo[end name]".
 
 [html
-<div class="definition">
+<div class="definition" id="def-name">
 <p class="prototype"><b>say "[name]"</b> <i class="glulx-only">(Glulx only)</i></p>
 <p>This text substitution denotes that the text following should be interpreted as a sequence of name glyphs. So, in logographic mode, it prints the beginning of a cartouche, identical to the "[cartouche]" phrase.
 <p>In alphabetic mode, it actually changes how the text following is displayed; instead of the whole text, only the first letter of each word is produced. The text is also printed in title case. So, "lipu [name]kama ante nimi toki anu pilin e[ideographic space]mani ale nimi kama ilo[end name]" would become "lipu Kantape Manki".
 </div>
-<div class="definition">
+<div class="definition" id="def-end-name">
 <p class="prototype"><b>say "[end name]"</b> <i class="glulx-only">(Glulx only)</i></p>
 <p>This text substitution denotes the end of a sequence of name glyphs. So, in logographic mode, it prints the end of a cartouche, identical to the "[end cartouche]" phrase. In alphabetic mode, it just tells Inform when to stop acronymizing.
 </div>
@@ -1741,7 +1745,7 @@ Section: Long Glyphs
 
 "[long glyph]" ("[LG]" for short) and "[end long glyph]" ("[ELG]" for short) mark long glyphs. Some elongatable glyphs have shorthand phrases defined; for example, "mi pali [kepeken] ilo nanpa[ELG]." is equivalent to "mi pali kepeken[LG] ilo nanpa[ELG]".
 
-It is easy to forget an "[end long glyph]", like so:
+Beware of forgetting an "[end long glyph]", like so:
 
 	Instead of praying, say "sina toki [tawa] sewi. taso sewi li kute ala.". [«tawa» erroneously extends all the way through the second sentence.]
 
@@ -1876,11 +1880,16 @@ If you need a quote within a quote, try "[meta te]" and "[meta to]".
 
 Section: The Banner
 
-You should provide your sitelen pona name for the "logographic story author" text, like this:
+You should provide your sitelen pona name as the "logographic story author" text, like so:
 
 	The story author is "jan Wiwijen". The logographic story author is "jan [cartouche]wan ijo wan ijo jaki en nanpa[end cartouche]".
 
-The banner uses this in logographic mode.
+The banner uses this in logographic mode. If your story title contains a cartouche (or needs to use some other logographic feature like a combined glyph) then provide a "logographic story title" as well:
+
+	"jan Osu pi wawa nasa" by jan Sonja
+
+	The logographic story author is "jan [cartouche]sona olin nasa jasima alasa[end cartouche]".
+	The logographic story title is "jan [cartouche]o suli uta[end cartouche] pi wawa nasa".
 
 
 Section: Supported fonts
@@ -1896,20 +1905,7 @@ If you do go through the trouble of implementing support for your favorite sitel
 
 
 
-Chapter: Consider Implementing These Actions
 
-The following verbs are not implemented by this extension, but are common enough that you should consider implementing them: [omit]kalama; mu; olin; toki; unpa; uta. ("uta olin e [thing]" is understood as kissing, and "uta pilin e [thing]" is understood as tasting, but just "uta e [thing]" could mean kissing or tasting or biting or something else, so it is left to the story author.)[/omit]
-
-[html
-<ul>
-<li>kalama
-<li>mu
-<li>olin
-<li>toki
-<li>unpa
-<li>uta. "uta olin e [thing]" is understood as kissing, and "uta pilin e [thing]" is understood as tasting, but just "uta e [thing]" could mean kissing or tasting or biting or something else, so it is left to the story author.)
-</ul>
-html]
 
 
 Example: * The Nominarium - Showcasing various ways to name things.
@@ -1918,6 +1914,7 @@ For our story to work in both alphabetic and logographic orthographies, we shoul
 
 	The story author is "jan Wiwijen". The logographic story author is "jan [cartouche]wan ijo wan ijo jaki en nanpa[end cartouche]".
 	
+
 
 
 

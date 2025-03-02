@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="tok">
+<html lang="en">
 <head>
   <title>Toki Pona for Inform 7: Documentation</title>
   <meta http-equiv="Content-Type" content="text/html;charset=utf-8">
@@ -24,6 +24,9 @@
 	    color: #000000;
 	    font-size: 1.1em;
 	    margin-top: 1.5em;
+    }
+    nav {
+        clear: both;
     }
     a {text-decoration: underline !important;}
     footer p {text-align: right;}
@@ -61,6 +64,9 @@
         width: max-content;}
     .logographic p::after {
         content:"‌"}
+    .deflink {
+        cursor: help;
+    }
   </style>
   <link href="indoc.css" rel="stylesheet" type="text/css">
 
@@ -68,17 +74,39 @@
 </head>
 <body class='paper papertint'>
 
-<p class='sectionheading'>Toki Pona for Inform 7 / Documentation</p>
+<header>
+    <p style="width:max-content;float:right;">(<a href="lipu_ilo.html">sina wile e toki pona la o tawa ni</a>)</p>
+    <p class='sectionheading' style="width:max-content;float:left;">Toki Pona for Inform 7 / Documentation</p>
+</header>
 
- 
+<nav><ul><li><a href='#1'>Chapter 1: Basic Prose</a></li>
+<li><a href='#1.1'>§1.1. Text with numbers</a></li>
+<li><a href='#1.2'>§1.2. Text with lists</a></li>
+</ul><ul><li><a href='#2'>Chapter 2: Adaptive Text and Responses</a></li>
+<li><a href='#2.1'>§2.1. Talking about things</a></li>
+<li><a href='#2.2'>§2.2. Adapting text about the player</a></li>
+</ul><ul><li><a href='#3'>Chapter 3: Translated Responses</a></li>
+</ul><ul><li><a href='#4'>Chapter 4: Consider Implementing These Actions</a></li>
+</ul><ul><li><a href='#5'>Chapter 5: Sitelen Pona</a></li>
+<li><a href='#5.1'>§5.1. The Story&#x27;s Orthography</a></li>
+<li><a href='#5.2'>§5.2. Wait, how do we control which font is used?</a></li>
+<li><a href='#5.3'>§5.3. Cartouches</a></li>
+<li><a href='#5.4'>§5.4. Compound Glyphs</a></li>
+<li><a href='#5.5'>§5.5. Long Glyphs</a></li>
+<li><a href='#5.6'>§5.6. Indentation </a></li>
+<li><a href='#5.7'>§5.7. Advanced Indentation</a></li>
+<li><a href='#5.8'>§5.8. Quotation Marks, or 「te &amp; to」</a></li>
+<li><a href='#5.9'>§5.9. The Banner</a></li>
+<li><a href='#5.10'>§5.10. Supported fonts</a></li>
+</ul></nav> 
 
 
 
 
 
-<hr><h1 class='chapterheading'>Chapter 1: Basic Prose</h1>
+<hr><h1 class='chapterheading' id='1'>Chapter 1: Basic Prose</h1>
 
-<h2 class='sectionheading' id='Text with numbers'>§1.1. Text with numbers</h2>
+<h2 class='sectionheading' id='1.1'>§1.1. Text with numbers</h2>
 
 <p>This extension implements the two number systems described in <i>lipu pu</i>, available with the &quot;[(number) in vague toki pona]&quot; and &quot;[(number) in specific toki pona]&quot; phrases. For example:</p>
 
@@ -101,7 +129,7 @@
 
 
 
-<h2 class='sectionheading' id='Text with lists'>§1.2. Text with lists</h2>
+<h2 class='sectionheading' id='1.2'>§1.2. Text with lists</h2>
 
 
 
@@ -127,7 +155,7 @@
 <blockquote class='code'><p class='quoted'>
 	The initial appearance of the desk is &quot;supa li suli. [lob]supa li jo [indenting 3][e list of for sale things on the desk].&quot;.<br>
 </p></blockquote>
-<p>Might say, depending on the things on the desk:</p>
+<p>might say, depending on what is on the desk:</p>
 
 <blockquote class='code'><p class='quoted'>
 	supa li suli. supa li jo e kili, e pan, e poki telo.<br>
@@ -144,7 +172,7 @@
 
 <p></p>
 <p>In logographic mode, commas are never used, regardless of the above options. Instead, the list is printed on multiple lines, and indented, like this:</p>
-<div class="logographic">
+<div class="logographic" lang="tok-sitelenpona">
 <p>supa li suli. 
 <p>supa li jo e kili
 <p>　　　e pan
@@ -152,8 +180,8 @@
 </div>
 <p></p>
 
-<hr><h1 class='chapterheading'>Chapter 2: Adaptive Text and Responses</h1>
-<h2 class='sectionheading' id='Talking about things'>§2.1. Talking about things</h2>
+<hr><h1 class='chapterheading' id='2'>Chapter 2: Adaptive Text and Responses</h1>
+<h2 class='sectionheading' id='2.1'>§2.1. Talking about things</h2>
 
 <p>The phrase &quot;[(noun) li]&quot; says the noun and then &quot; li&quot;, unless the noun is &quot;mi&quot; or &quot;sina&quot;, in which case it just says the noun. (More specifically, it drops the «li» if the noun is the player and the viewpoint is first or second person.) It&#x27;s sort of like <a href='https://ganelson.github.io/inform-website/book/WI_14_2.html'>saying "[The noun] [are]" in English</a>.</p>
 
@@ -170,18 +198,32 @@
 	<br>
 	&gt;nena e mi<br>
 	kon sina li nasa ala.<br>
-</p></blockquote><h2 class='sectionheading' id='Adapting text about the player'>§2.2. Adapting text about the player</h2>
+</p></blockquote><h2 class='sectionheading' id='2.2'>§2.2. Adapting text about the player</h2>
 
 <p>The &quot;[mi]&quot; phrase is equivalent to <a href='https://ganelson.github.io/inform-website/book/WI_14_4.html'>Inform's "[we]" phrase</a>. It prints either &quot;mi&quot;, &quot;sina&quot;, or &quot;ona&quot;, depending on the story viewpoint. Unless you plan to switch the story viewpoint, you probably won&#x27;t need this phrase.</p>
-<hr><h1 class='chapterheading'>Chapter 3: Translated Responses</h1>
+<hr><h1 class='chapterheading' id='3'>Chapter 3: Translated Responses</h1>
 
 <p>This extension provides translations for default rule responses. You can view these in the extension source, or with the RESPONSES ALL command. See <a href="https://ganelson.github.io/inform-website/book/WI_14_10.html">§14.10. Responses</a> for how to override responses.</p>
 
 <p>The responses make heavy use of the &quot;[mi li]&quot; phrase, which is shorthand for &quot;[the player li]&quot;, so it evaluates to &quot;mi&quot; or &quot;sina&quot; or &quot;ona li&quot;, depending on the story viewpoint.</p>
 
+<hr><h1 class='chapterheading' id='4'>Chapter 4: Consider Implementing These Actions</h1>
 
-<hr><h1 class='chapterheading'>Chapter 4: Sitelen Pona</h1>
-<h2 class='sectionheading' id='The Story&#x27;s Orthography'>§4.1. The Story&#x27;s Orthography</h2>
+<p>The following verbs are not implemented by this extension, but are common enough that you should consider implementing them: </p>
+
+<p></p>
+<ul>
+<li>kalama
+<li>mu
+<li>olin
+<li>toki
+<li>unpa
+<li>uta. "uta olin e [thing]" is understood as kissing, and "uta pilin e [thing]" is understood as tasting, but just "uta e [thing]" could mean kissing or tasting or biting or something else, so its implementation is left to the story author.
+</ul>
+<p></p>
+
+<hr><h1 class='chapterheading' id='5'>Chapter 5: Sitelen Pona</h1>
+<h2 class='sectionheading' id='5.1'>§5.1. The Story&#x27;s Orthography</h2>
 
 <p>This extension implements fancy typographic features for sitelen pona ­— or rather, it defines a number of phrases that leverage the features of sitelen pona fonts, <a href="https://github.com/ETBCOR/nasin-nanpa">nasin nanpa</a> in particular. This extension defines a variable called `the current orthography`, which can be `alphabetic` or `logographic`, and in the latter case, the game assumes that its interpreter is using a compatible sitelen pona font.</p>
 
@@ -190,12 +232,12 @@
 <blockquote class='code'><p class='quoted'>
 Chapter - Where We&#x27;re Going We Don&#x27;t Need Logography (replacing Toggling Orthographical Features in Toki Pona by Vivian Rose)<br>
 </p></blockquote>
-<h2 class='sectionheading' id='Wait, how do we control which font is used?'>§4.2. Wait, how do we control which font is used?</h2>
+<h2 class='sectionheading' id='5.2'>§5.2. Wait, how do we control which font is used?</h2>
 
-<p>An Inform 7 story has no way of signaling a font preference to the interpreter. This extension assumes that some external mechanism ensures that the nasin nanpa font is used when `the current orthography is logographic`, and a more traditional font is used otherwise. Example TODO demonstrates how this might be achieved in a web interpreter using JavaScript. On other interpreters, the player will probably have to manually set the font to nasin nanpa, and the interpreter may not even be able to display it properly.</p>
+<p>An Inform 7 story has no way of signaling a font preference to the interpreter. This extension assumes that some external mechanism ensures that the nasin nanpa font is used when `the current orthography is logographic`, and a more traditional font is used otherwise. This can be achieved on a web interpreter like Bisquixe or Vorple using custom CSS. On other interpreters, the player will probably have to manually set the font to nasin nanpa, and even then, the interpreter may not be able to display it properly.</p>
 
 
-<h2 class='sectionheading' id='Cartouches'>§4.3. Cartouches</h2>
+<h2 class='sectionheading' id='5.3'>§5.3. Cartouches</h2>
 
 <p>Use &quot;[cartouche]&quot; and &quot;[end cartouche]&quot; to write cartouches. One example that works in either orthography:</p>
 
@@ -208,12 +250,12 @@ Chapter - Where We&#x27;re Going We Don&#x27;t Need Logography (replacing Toggli
 	The printed name of Counterfeit Monkey is &quot;lipu [name]kama ante nimi toki anu pilin e[ideographic space]mani ale nimi kama ilo[end name]&quot;.<br>
 </p></blockquote>
 <p></p>
-<div class="definition">
+<div class="definition" id="def-name">
 <p class="prototype"><b>say "[name]"</b> <i class="glulx-only">(Glulx only)</i></p>
 <p>This text substitution denotes that the text following should be interpreted as a sequence of name glyphs. So, in logographic mode, it prints the beginning of a cartouche, identical to the "[cartouche]" phrase.
 <p>In alphabetic mode, it actually changes how the text following is displayed; instead of the whole text, only the first letter of each word is produced. The text is also printed in title case. So, "lipu [name]kama ante nimi toki anu pilin e[ideographic space]mani ale nimi kama ilo[end name]" would become "lipu Kantape Manki".
 </div>
-<div class="definition">
+<div class="definition" id="def-end-name">
 <p class="prototype"><b>say "[end name]"</b> <i class="glulx-only">(Glulx only)</i></p>
 <p>This text substitution denotes the end of a sequence of name glyphs. So, in logographic mode, it prints the end of a cartouche, identical to the "[end cartouche]" phrase. In alphabetic mode, it just tells Inform when to stop acronymizing.
 </div>
@@ -221,13 +263,13 @@ Chapter - Where We&#x27;re Going We Don&#x27;t Need Logography (replacing Toggli
 
 <p>The &quot;[name]…[end name]&quot; phrases do not support the more concise, experimental name-writing systems that use <a href="https://sona.pona.la/wiki/User:Jan_Sonja/nasin_sitelen_kalama_pi_linja_lili">tally marks</a> or <a href="https://sona.pona.la/wiki/nasin_sitelen_kalama">dots</a>. If you want to use those, write out something like &quot;jan [if the current orthography is alphabetic]Sonja[else][cartouche]sona,,, jan,,[end cartouche]&quot;. </p>
 
-<h2 class='sectionheading' id='Compound Glyphs'>§4.4. Compound Glyphs</h2>
+<h2 class='sectionheading' id='5.4'>§5.4. Compound Glyphs</h2>
 
-<p>The &quot;[~]&quot; phrase, terse to spare the proser&#x27;s hands, says a space if the current orthography is alphabetic, or a compound glyph joiner character otherwise. For example, &quot;toki[~]pona&quot; becomes &quot;toki pona&quot; in alphabetic mode, and  becomes <span class="logographic">toki‍pona</span> in logographic mode.</p>
+<p>The &quot;[~]&quot; phrase, terse to spare the proser&#x27;s hands, says a space if the current orthography is alphabetic, or a compound glyph joiner character otherwise. For example, &quot;toki[~]pona&quot; becomes &quot;toki pona&quot; in alphabetic mode, and  becomes <span class="logographic" lang="tok-sitelenpona">toki‍pona</span> in logographic mode.</p>
 
 <p>There is also a &quot;compound glyphs enabled&quot; truth variable that, when false, makes this phrase evaluate to a simple space regardless of orthography.</p>
 
-<h2 class='sectionheading' id='Long Glyphs'>§4.5. Long Glyphs</h2>
+<h2 class='sectionheading' id='5.5'>§5.5. Long Glyphs</h2>
 
 <p>&quot;[long glyph]&quot; (&quot;[LG]&quot; for short) and &quot;[end long glyph]&quot; (&quot;[ELG]&quot; for short) mark long glyphs. Some elongatable glyphs have shorthand phrases defined; for example, &quot;mi pali [kepeken] ilo nanpa[ELG].&quot; is equivalent to &quot;mi pali kepeken[LG] ilo nanpa[ELG]&quot;.</p>
 
@@ -240,7 +282,7 @@ Chapter - Where We&#x27;re Going We Don&#x27;t Need Logography (replacing Toggli
 
 <p>There is also a &quot;long glyphs enabled&quot; truth variable that, when false, causes long glyph markers to be ignored even in logographic mode.</p>
 
-<h2 class='sectionheading' id='Indentation '>§4.6. Indentation </h2>
+<h2 class='sectionheading' id='5.6'>§5.6. Indentation </h2>
 
 <p>TODO replace examples with those from lipu su?</p>
 
@@ -268,7 +310,7 @@ Chapter - Where We&#x27;re Going We Don&#x27;t Need Logography (replacing Toggli
 <p></p>
 
 <p>With these, we can say something like &quot;sina wile [indenting 2]e kili [ilob]e pan [ilob]e telo.&quot; This puts each «e {noun}» on its own line, forming an elegant column of «e»s. </p>
-<div class="logographic">
+<div class="logographic" lang="tok-sitelenpona">
 <p>sina wile e kili
 <p>　　e pan
 <p>　　e telo.
@@ -282,7 +324,7 @@ Chapter - Where We&#x27;re Going We Don&#x27;t Need Logography (replacing Toggli
 <p>Prints a comma if the orthography is alphabetic. Otherwise, prints a line break and an indent dependent on the <i>current ideographic indentation level</i>.</p>
 </div>
 <p>&quot;sina wile [indenting 2]e kili [cilob]e pan [cilob]e telo.&quot; is identical to the previous example for the logographic orthography, but in alphabetic mode it says &quot;sina wile e kili, e pan, e telo.&quot;. This phrase is most useful for long, complex sentences that need broken up for readability regardless of the writing system.</p>
-<h2 class='sectionheading' id='Advanced Indentation'>§4.7. Advanced Indentation</h2>
+<h2 class='sectionheading' id='5.7'>§5.7. Advanced Indentation</h2>
 
 <p> <img src='su_sample_sample.png' alt='Sample page from lipu su' class='su'> </p>
 
@@ -315,7 +357,7 @@ Chapter - Where We&#x27;re Going We Don&#x27;t Need Logography (replacing Toggli
 
 <p>Might give us, depending on the status of the Kansan:</p>
 
-<div class="logographic">
+<div class="logographic" lang="tok-sitelenpona">
 <p>ma ni la jan lili li kama toki tawa jan lili mute [mu] 
 <p>　　　　　li toki tawa meli wawa pi ma lete
 <p>
@@ -340,7 +382,7 @@ Chapter - Where We&#x27;re Going We Don&#x27;t Need Logography (replacing Toggli
 
 
 
-<h2 class='sectionheading' id='Quotation Marks, or 「te &amp; to」'>§4.8. Quotation Marks, or 「te &amp; to」</h2>
+<h2 class='sectionheading' id='5.8'>§5.8. Quotation Marks, or 「te &amp; to」</h2>
 
 <p><i>lipu su</i>'s corner brackets are arguably <a href="https://sona.pona.la/wiki/te_and_to">particles</a>, called te and to. They can be invoked thus:</p>
 
@@ -350,7 +392,7 @@ Chapter - Where We&#x27;re Going We Don&#x27;t Need Logography (replacing Toggli
 
 
 <p></p>
-<p>In logographic mode, these should show up as corner brackets: <span class="logographic">sina toki: te|mi wile moku.|to</span></p>
+<p>In logographic mode, these should show up as corner brackets: <span class="logographic" lang="tok-sitelenpona">sina toki: te|mi wile moku.|to</span></p>
 <p></p>
 
 
@@ -360,16 +402,16 @@ Chapter - Where We&#x27;re Going We Don&#x27;t Need Logography (replacing Toggli
 
 <p>If you need a quote within a quote, try &quot;[meta te]&quot; and &quot;[meta to]&quot;.</p>
 
-<h2 class='sectionheading' id='The Banner'>§4.9. The Banner</h2>
+<h2 class='sectionheading' id='5.9'>§5.9. The Banner</h2>
 
-<p>You should provide your sitelen pona name for the &quot;logographic story author&quot; text, like this:</p>
+<p>You should provide your sitelen pona name as the &quot;logographic story author&quot; text, like so:</p>
 
 <blockquote class='code'><p class='quoted'>
 	The story author is &quot;jan Wiwijen&quot;. The logographic story author is &quot;jan [cartouche]wan ijo wan ijo jaki en nanpa[end cartouche]&quot;.<br>
 </p></blockquote>
 <p>The banner uses this in logographic mode.</p>
 
-<h2 class='sectionheading' id='Supported fonts'>§4.10. Supported fonts</h2>
+<h2 class='sectionheading' id='5.10'>§5.10. Supported fonts</h2>
 
 <p>The sitelen pona font doesn&#x27;t have to be nasin nanpa; it can be some other sitelen pona font with similar ligatures. If it uses different ligatures, you will have to override this extension&#x27;s &quot;Configuration Specific to the nasin nanpa Font&quot; chapter, like so:</p>
 
@@ -382,20 +424,8 @@ Chapter - Some Other Font Support (in place of Configuration Specific to the nas
 
 
 
-<hr><h1 class='chapterheading'>Chapter 5: Consider Implementing These Actions</h1>
 
-<p>The following verbs are not implemented by this extension, but are common enough that you should consider implementing them: </p>
 
-<p></p>
-<ul>
-<li>kalama
-<li>mu
-<li>olin
-<li>toki
-<li>unpa
-<li>uta. "uta olin e [thing]" is understood as kissing, and "uta pilin e [thing]" is understood as tasting, but just "uta e [thing]" could mean kissing or tasting or biting or something else, so it is left to the story author.)
-</ul>
-<p></p>
 
 
 <p>Example: * The Nominarium - Showcasing various ways to name things.</p>
@@ -406,6 +436,7 @@ Chapter - Some Other Font Support (in place of Configuration Specific to the nas
 	The story author is &quot;jan Wiwijen&quot;. The logographic story author is &quot;jan [cartouche]wan ijo wan ijo jaki en nanpa[end cartouche]&quot;.<br>
 	<br>
 </p></blockquote>
+
 
 
 

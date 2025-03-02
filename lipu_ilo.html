@@ -1,0 +1,833 @@
+<!DOCTYPE html>
+<html lang="tok">
+<head>
+  <title>ilo Toki Pona by Vivian Rose</title>
+  <meta http-equiv="Content-Type" content="text/html;charset=utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="author" content="Vivian Rose">
+  <meta name="description" content="o kama sona e ilo “Toki Pona by Vivian Rose”. kepeken ilo ni la sina ken pali e musi pi toki pona kepeken ilo Inform 7.">
+  <link rel="icon" href="favicon.svg">
+  <!--link rel="stylesheet" href="style.css"-->
+  <link href="indoc.css" rel="stylesheet" type="text/css">
+  <style>    
+    @font-face {font-family: "nasin nanpa"; src: url("nasin-nanpa-4.0.1.otf");}
+    body {background-color: #ffedff !important;}
+    h1 {
+        margin-top: 2em;
+    }
+    h1, h2, h3 {
+        font-size:1em; 
+        font-weight:normal;
+    }
+    .chapterheading {
+	    color: #000000;
+	    font-size: 1.3em;
+	    text-align: center;
+    }
+    .sectionheading {
+	    color: #000000;
+	    font-size: 1.1em;
+	    margin-top: 1.5em;
+    }
+    hr {
+        clear: both;
+    }
+    a {text-decoration: underline !important;}
+    footer p {text-align: right;}
+    ul {font-size: 0.8em;}
+
+    img {max-width:100%}
+    img.su {
+        float: none;
+        display: block;
+        margin-left: auto;
+        margin-right: auto;
+        margin-top: 1.5em;
+        width:40em;
+        border: 1px solid black;
+    }
+    
+    .glulx-only {float: right;}
+    
+    .transcript {
+        background-color: white;
+        padding: 1em;
+        margin: 1em;
+        width: max-content;
+        border: 1px solid black;
+    }
+    .logographic {
+        font-family: "nasin nanpa";
+        background-color: white;
+        line-height:0.5;
+    }
+    .tinyquote {
+        background-color: white;
+        padding: 0.1em;
+    }
+    span.logographic, .logographic p {
+        font-size: large;
+    }
+    .logographic p::after {
+        content:"‌"
+    }
+    
+    .pair {
+        display:flex;
+        justify-content:center;
+        flex-wrap:wrap;
+     }
+    .pair div {
+        padding:1em;
+        max-width: 100%;
+    }
+    .pair h3 {text-align:center;}
+    .pair div blockquote {
+        margin-left: auto;
+        margin-right: auto;
+        max-width: 100%;
+    }
+    .code {color:#000080;}
+    
+    pre, code, samp {
+        font-family: inherit;
+        font-size: inherit;
+        line-height: inherit;
+    }
+    
+    
+    /* Examples */
+    div.egnamecell {
+        margin-left: 60px;
+    }
+    
+  </style>
+  
+</head>
+<body class='paper papertint'>
+
+<header>
+    <p style="width:max-content;float:right;">(<a href="doc.html">Click here to read in English</a>)</p>
+    <p class='sectionheading' style="width:max-content;float:left;">ilo <i>Toki Pona by Vivian Rose</i> lon ilo Inpo</p>
+</header>
+
+<hr>
+
+<h1 class='chapterheading' id=''>§. toki</h1>
+
+<h2 class='sectionheading' id='1.1'>§. o toki e nanpa</h2>
+
+<div class="definition">
+<p class="prototype"><b>say "[</b>(number)<b> in vague toki pona]"</b></p>
+<p>o toki e nanpa kepeken nasin wan pi lipu pu.</p>
+<ul>
+<li>"[1 in vague toki pona]" li kama "wan"</li>
+<li>"[2 in vague toki pona]" li kama "tu"</li>
+<li>"[3 in vague toki pona]" li kama "mute"</li>
+<li>"[4 in vague toki pona]" li kama "mute"</li>
+<li>"[47 in vague toki pona]" li kama "mute"</li>
+<li>"[413 in vague toki pona]" li kama "mute"</li>
+</ul>
+</div>
+<div class="definition">
+<p class="prototype"><b>say "[</b>(number)<b> in specific toki pona]"</b></p>
+<p>o toki e nanpa kepeken nasin tu pi lipu pu.</p>
+<ul>
+<li>"[1 in specific toki pona]" li kama "wan"</li>
+<li>"[2 in specific toki pona]" li kama "tu"</li>
+<li>"[3 in specific toki pona]" li kama "tu wan"</li>
+<li>"[4 in specific toki pona]" li kama "tu tu"</li>
+<li>"[47 in specific toki pona]" li kama "mute mute luka tu"</li>
+<li>"[413 in specific toki pona]" li kama "ale ale ale ale luka luka tu wan"</li>
+</ul>
+</div>
+
+<h2 class='sectionheading' id='1.1'>§. o toki e kulupu ijo</h2>
+
+<p>sina ken toki e kulupu pi ijo mute kepeken toki Inli <a href="https://ganelson.github.io/inform-website/book/WI_5_5.html">kepeken nimi “[A list of (description of objects)]” kepeken nimi “[is-are a list of (description of objects)]”</a>. sina ken toki e kulupu pi ijo mute kepeken toki pona kepeken nimi ni:
+
+<div class="definition">
+<p class="prototype"><b>say "[</b>(object anu list of objects)<b> li]"</b></p>
+<p>o toki e kulupu ijo e nimi “li”. o toki e ijo tu kepeken nimi “en”. sitelen Lasina la o toki e ijo mute kepeken nimi “,” kin.
+<p>kulupu li “the player” taso la, “the player” li “mi” anu “sina” la, o weka e nimi “li”.
+<p>nimi “,” li ike tawa sina la sina ken weka e ona:
+<blockquote class="code"><p>
+    Use no commas for subjects.
+</p></blockquote>
+</div>
+
+<p>ni:
+
+<blockquote class="code"><p>
+    The initial appearance of the desk is "supa li suli. [list of things on the desk li] lon supa.".
+</p></blockquote>
+
+<p>li ken kama:
+<ul>
+<li>supa li suli. kili, en pan, en poki telo li lon supa.</li>
+<li>supa li suli. kili en pan li lon supa.</li>
+<li>supa li suli. kili li lon supa.</li>
+<li>supa li suli. ala li lon supa.</li>
+</ul>
+
+<div class="definition" id="def-e-list">
+<p class="prototype"><b>say "[e </b>(list of objects)<b>]"</b></p>
+<p>o toki e kulupu ijo e nimi “e”. sitelen Lasina la o toki e ijo mute kepeken nimi “,” kin.
+<p>sitelen Lasina la nimi “,” li ike tawa sina la sina ken weka e ona:
+<blockquote class="code"><p>
+    Use no commas for direct objects.
+</p></blockquote>
+<p>sitelen pona la, o toki e ijo tu anu ijo mute kepeken poka walo.
+</div>
+
+<p>ni:
+
+<blockquote class="code"><p>
+    The initial appearance of the desk is "supa li suli. supa li jo [e list of things on the desk].".
+</p></blockquote>
+
+<p>li ken kama:
+<ul>
+<li>supa li suli. supa li jo e kili, e pan, e poki telo.</li>
+<li>supa li suli. supa li jo e kili e pan.</li>
+<li>supa li suli. supa li jo e kili.</li>
+<li>supa li suli. supa li jo e ala.</li>
+</ul>
+
+<!--<p>musi sina li wile toki kepeken sitelen pona la, nimi ni li wile e nanpa <i>current ideographic indentation level</i>. sina ken kama sona e ona lon <a href="#poka-walo-e">lipu <i>§. o sitelen e kulupu pi ijo mute lon poka walo</a></i>.-->
+
+
+<h2 class="sectionheading">§. o mi anu sina</h2>
+
+<div class="definition">
+    <p class="prototype"><b>say "[mi]"</b>
+    <p><span class="code">story viewpoint</span> la, o toki e nimi “mi” anu nimi “sina” anu nimi “ona”.
+</div>
+
+<p>ni li sama <a href="https://ganelson.github.io/inform-website/book/WI_14_4.html">nimi “[we]”</a>. musi sina li ante ala e kon <span class="code">story viewpoint</span> la, musi sina li wile ala pali kepeken ni.
+
+
+
+<h2 class="sectionheading">§. o toki lili e mi e sina e ijo ante</h2>
+
+<p>o lukin e musi lili ni:
+
+<blockquote class="code"><p>
+    Instead of smelling something, say "kon ona li nasa ala.".
+</p></blockquote>
+
+<blockquote class="transcript"><p>
+    >o nena e mi<br>
+    kon ona li nasa ala.
+</p></blockquote>
+
+<p>mi pilin la nimi “ona” li nasa lili lon ni. sina pilin sama mi la, o pali kepeken nimi ni:
+
+<div class="definition">
+    <p class="prototype"><b>say "[ona]"</b>
+    <p>kon <span class="code">prior named object</span> la, o toki e nimi “ona”, anu nimi “sina” anu nimi “mi”.
+    <p>(ni li sama <a href="https://ganelson.github.io/inform-website/book/WI_14_6.html">nimi “[those]”</a>.) 
+</div>
+
+<p>kepeken ni la...
+
+<blockquote class="code"><p>
+    Instead of smelling something, say "kon [regarding the noun][ona] li nasa ala.".
+</p></blockquote>
+
+<blockquote class="transcript"><p>
+    >o nena e pan<br>
+    kon ona li nasa ala.<br>
+    <br>
+    >o nena e soweli suli<br>
+    kon ona li nasa ala.<br>
+    <br>
+    >o nena e mi<br>
+    kon sina li nasa ala.
+</p></blockquote>
+
+
+
+
+<h1 class="sectionheading" id=''>§. o ante e kon pi nimi “ona”</h1>
+
+<p>musi sina li ken sona e nimi “ona”. <a href="https://ganelson.github.io/inform-website/book/WI_17_18.html">“set pronouns from (object)”</a> li ante e kon pi nimi “ona”.
+
+
+
+
+<h1 class='chapterheading' id=''>§. o toki kepeken sitelen pona</h1>
+
+<p>musi sina li wile toki kepeken sitelen pona la o awen lukin e ni.
+
+<p>ni li tan ilo <i>Toki Pona by Vivian Rose</i>:
+
+<blockquote class="code"><p>
+An orthography is a kind of value. The orthographies are alphabetic and logographic. The current orthography is a orthography that varies.
+</p></blockquote>
+
+<p><span class="code">current orthography is alphabetic</span> la, musi li wile toki kepeken sitelen Lasina. 
+
+<p><span class="code">current orthography is logographic</span> la, musi li wile toki kepeken sitelen pona, kepeken <i><a href="https://github.com/ETBCOR/nasin-nanpa">nasin nanpa</a></i>.
+
+
+
+<h2 class="sectionheading" id=''>§. taso a seme la musi mi li ken lawa e sitelen??</h2>
+
+<p>ilo <i>Inform 7</i> li ken ala lawa e sitelen.
+
+<p>musi “anpa ma” li lawa e sitelen kepeken ilo <i>JavaScript</i> kepeken ilo <i>CSS</i>. o lukin e nasin ona. [TODO o toki mute]
+
+
+
+
+
+<h2 class="sectionheading" id=''>§. o poki e nimi</h2>
+
+<div class="definition">
+    <p class="prototype"><b>say "[cartouche]"</b></p>
+    <p>o open e poki nimi.</p>
+</div>
+<div class="definition">
+    <p class="prototype"><b>say "[end cartouche]"</b></p>
+    <p>o pini e poki nimi.</p>
+</div>
+
+<p>kepeken nimi tu ni la sina ken toki e poki nimi.
+
+<blockquote class="code"><p>
+    When play begins:<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;say "sina li [if the current orthography is alphabetic]jan Towasi[otherwise][cartouche]tomo olin wile alasa suwi ijo[end cartouche][end if].".
+</p></blockquote>
+
+<p>sitelen la ni li kama:
+
+<div class="pair">
+    <div>
+        <h3>sitelen Lasina la</h3><hr>
+        <blockquote class="transcript">
+            <p>sina li jan Towasi.
+        </blockquote>
+        </div>
+    <div>
+        <h3>sitelen pona la</h3><hr>
+        <blockquote class="logographic transcript">
+            <p>sina li jan [tomo olin wile alasa suwi ijo].
+        </blockquote>
+    </div>
+</div>
+
+<p>tan nimi "if the current orthography is alphabetic" la, musi ni li ken pona kepeken sitelen pona anu sitelen Lasina. taso a, nimi ni li mute ike! sina ken lili e pali kepeken nimi ni:
+
+<div class="definition">
+    <p class="prototype"><b>say "[name]"</b> <i class="glulx-only">(ilo Glulx taso)</i></p>
+    <p>sitelen pona la, o open e poki nimi.
+    <p>sitelen Lasina la, o open toki e sitelen nanpa wan taso tan nimi ale. (nimi “lipu [name]kama ante nimi toki anu pilin e[ideographic space]mani ale nimi kama ilo[end name]” li kama nimi “lipu Kantape Manki”)</p>
+</div>
+<div class="definition">
+    <p class="prototype"><b>say "[end name]"</b> <i class="glulx-only">(ilo Glulx taso)</i></p>
+    <p>sitelen pona la, o pini e poki nimi.
+    sitelen Lasina la, o pini toki e sitelen nanpa wan taso tan nimi ale.</p>
+</div>
+
+<p>kepeken nimi tu ni la, sina ken:
+
+<blockquote class='code'><p>
+    When play begins:<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;say "sina li jan [name]tomo olin wile alasa suwi ijo[end name].".
+</p></blockquote>
+
+<p>nasin ni li kama sama.
+
+
+
+
+<h2 class="sectionheading" id=''>§. o wan e sitelen tu</h2>
+
+<div class="definition">
+    <p class="prototype"><b>say "[~]"</b></p>
+    <p>sitelen Lasina la, o toki e walo wan “ ”.
+    <p>sitelen pona la, o wan e sitelen tu. "toki[~]pona" li kama “<span class="logographic">toki+pona</span>”.
+</div>
+
+
+
+
+<h2 class="sectionheading" id=''>§. o sitelen lon poka walo<h2>
+
+<p>o lukin e ni tan lipu su:
+
+<p> <img src='su_sample_sample.png' alt='Sample page from lipu su' class='su'> </p>
+
+<p>ni la, nimi “<span class="logographic">li toki tawa meli wawa pi ma lete</span>” li lon poka walo. musi sina li ken sama!
+
+<p>sina ken pali nasa e ni:
+
+<div class="definition">
+<p class="prototype"><b>say "[ideographic space]"</b></p>
+<p>o toki e walo wan: “　”.
+</div>
+
+<blockquote class='code'><p class='quoted'>
+    To say short for Munchkin:<br>
+	&nbsp;&nbsp;&nbsp;&nbsp;say "[if the current orthography is alphabetic]Mansukin[else][cartouche]mu[end cartouche]".<br>
+    When play begins:<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;say "ma ni la jan [name]tomo olin wile alasa suwi ijo[end name] li kama toki tawa jan lili mute [short for Munchkin][if the current orthography is alphabetic][line break][end if][ideographic space][ideographic space][ideographic space][ideographic space][ideographic space][ideographic space][ideographic space][ideographic space][ideographic space][ideographic space][ideographic space]li toki tawa meli wawa pi ma lete.".<br>
+</p></blockquote>
+
+<div class="pair">
+    <div>
+        <h3>sitelen Lasina la</h3><hr>
+        <blockquote class="transcript">
+            <p>ma ni la jan Towasi li kama toki tawa jan lili mute Mansukin li toki tawa meli wawa pi ma lete.
+        </blockquote>
+    </div>
+
+    <div>
+        <h3>sitelen pona la</h3><hr>
+        <blockquote class="logographic transcript">
+            <p>ma ni la jan [tomo olin wile alasa suwi ijo] li kama toki tawa jan lili mute [mu]
+            <p>　　　　　　　　　　　li toki tawa meli wawa pi ma lete.
+        </blockquote>
+
+    </div>
+</div>
+
+
+
+<p>nasin ni li pali. <b>taso nasin ni li nasa ike!</b> sina pali sitelen sama ni la luka sina li pakala. o pali kepeken nimi ni:
+
+<div class="definition">
+    <p class="prototype"><b>say "[lob]"</b></p>
+    <p>sitelen pona la, o pali sama “[line break]”. sitelen Lasina la, o ala.
+</div>
+<div class="definition">
+    <p class="prototype"><b>say "[indenting </b>(number)<b>]"</b></p>
+    <p>o ante e nanpa pi poka walo (<i>current ideographic indentation level</i>).
+</div>
+<div class="definition">
+    <p class="prototype"><b>say "[indent]"</b></p>
+    <p>sitelen pona la, o toki e walo. suli walo li nanpa <i>current ideographic indentation level</i>.
+    <p>sitelen Lasina la, o ala.
+</div>
+<div class="definition">
+    <p class="prototype"><b>say "[ilob]"</b></p>
+    <p>ni li sama nimi “[indent][lob]”.
+</div>
+
+
+<blockquote class='code'><p class='quoted'>
+	To meet the Ozians:<br>
+	&nbsp;&nbsp;&nbsp;&nbsp;say &quot;ma ni la jan [name]tomo olin wile alasa suwi ijo[end name][indenting 11] li kama toki tawa jan lili mute [if the current orthography is alphabetic]Mansukin[else][cartouche]mu[end cartouche][end if][ilob] li toki tawa meli wawa pi ma lete&quot;.<br>
+</p></blockquote>
+
+<p>ni li lili pona.
+
+<p>...taso a, nimi pi jan Towasi li ken ante la, nanpa “11” li wile seme? ni la, sina ken pali kepeken nimi wawa ni:
+
+<div class="definition" id="dentally-say">
+<p class="prototype"><b>dentally say</b> (text)</p>
+<p>o toki e nimi. kin la, nanpa <i>current ideographic indentation level</i> li kama suli sama nimi.</p>
+</div>
+
+<p>lipu ni:
+
+<blockquote class='code'><p class='quoted'>
+	To say short for Munchkin:<br>
+	&nbsp;&nbsp;&nbsp;&nbsp;say &quot;[if the current orthography is alphabetic]Mansukin[else][cartouche]mu[end cartouche]&quot;.<br>
+	<br>
+	The Kansan is a person. The Kansan can be anonymous. The Kansan can be transgender. The printed name of the Kansan is &quot;jan [if anonymous]lili[otherwise if transgender][name]tomo olin wile ijo jan alasa nasin[end name][otherwise][name]tomo olin wile alasa suwi ijo[end name]&quot;.<br>
+	<br>
+	To meet the Ozians:<br>
+	&nbsp;&nbsp;&nbsp;&nbsp;dentally say &quot;ma ni la [Kansan] &quot;;<br>
+	&nbsp;&nbsp;&nbsp;&nbsp;say &quot;li kama toki tawa jan lili mute [short for Munchkin] [ilob]li toki tawa meli wawa pi ma lete&quot;.<br>
+</p></blockquote>
+
+<p>li ken kama mute a:
+
+<div class="logographic transcript" lang="tok-sitelenpona">
+<p>ma ni la jan lili li kama toki tawa jan lili mute [mu] 
+<p>　　　　　li toki tawa meli wawa pi ma lete
+<p>
+<p>ma ni la jan [tomo olin wile alasa suwi ijo] li kama toki tawa jan lili mute [mu] 
+<p>　　　　　　　　　　　li toki tawa meli wawa pi ma lete
+<p>
+<p>ma ni la jan [tomo olin wile ijo jan alasa nasin] li kama toki tawa jan lili mute [mu] 
+<p>　　　　　　　　　　　　li toki tawa meli wawa pi ma lete
+</div>
+
+<h2 class="sectionheading" id=''>§. ilo pi nasin sitelen tu<h2>
+
+<p>musi sina li wile toki kepeken sitelen Lasina kepeken sitelen pona kin la, o awen lukin e ni.
+
+<p>lipu su li toki e toki kepeken nimi “te” kepeken nimi “to”. sina ken sama kepeken nimi tu ni:
+
+<div class="definition">
+    <p class="prototype"><b>say "[te]"</b>
+    <p>sitelen Lasina la, o toki e nimi <span class="tinyquote">“</span>. (nimi <span class="tinyquote">“</span> en nimi <span class="tinyquote">"</span> li ante lili. o lukin wawa.)
+    <p>sitelen pona la, o toki e “<span class="logographic">te</span>”.
+</div>
+
+<div class="definition">
+    <p class="prototype"><b>say "[to]"</b>
+    <p>sitelen Lasina la, o toki e nimi <span class="tinyquote">”</span>. (nimi <span class="tinyquote">”</span> en nimi <span class="tinyquote">"</span> li ante lili. o lukin wawa.)
+    <p>sitelen pona la, o toki e “<span class="logographic">to</span>”.
+</div>
+
+<p>kin la, sina ken pilin e ni: sitelen pona la, nimi “?” li nasa lon poka pi nimi “seme”.
+
+<blockquote class="logographic transcript">
+<p>sina pilin seme?
+</blockquote>
+
+<p>“<span class="logographic">seme?</span>” li ike tawa sina la, o pali kepeken nimi ni:
+
+<div class="definition">
+    <p class="prototype"><b>say "[?]"</b></p>
+    <p>sitelen Lasina la, o toki e “?”. sitelen pona la, o ala.
+</div>
+
+<p>kepeken nimi ni la…
+
+<blockquote class="code"><p>
+    say "jan pona li toki e ni: [te]sina pilin seme[?][to]".
+</p></blockquote>
+
+<div class="pair">
+    <div>
+        <h3>sitelen Lasina la</h3><hr>
+        <blockquote class="transcript">
+            <p>jan pona li toki e ni: “sina pilin seme?”
+        </blockquote>
+        </div>
+    <div>
+        <h3>sitelen pona la</h3><hr>
+        <blockquote class="logographic transcript">
+            <p>jan pona li toki e ni: te|sina pilin seme|to
+        </blockquote>
+    </div>
+</div>
+
+
+<p>sitelen Lasina la, sina ken wile kipisi e nimi mute kepeken nimi “,”. sitelen pona la, sina ken wile kipisi e nimi mute kepeken ante. kepeken nimi ni la, musi sina li ken toki kepeken nasin tu:
+
+<div class="definition">
+    <p class="prototype"><b>say "[cilob]"</b></p>
+    <p>sitelen Lasina la, o toki e “, ”.
+    <p>sitelen pona la, o toki e "<a href="#def-ilob" class="deflink">[ilob]</a>".
+</div>
+
+<div class="definition">
+    <p class="prototype"><b>say "[comma]"</b></p>
+    <p>sitelen Lasina la, o toki e “,”.
+    <p>sitelen pona la, o ala.
+</div>
+
+<p>kepeken nimi ni la…
+
+<blockquote class="code"><p>
+    say "sina pilin olin. sina lukin e jan pona. [lob]sina olin [indenting 2]e sijelo wawa ona[cilob]e luka seli ona[cilob]e linja pimeja suli ona[cilob]e sinpin suwi ona kin. [paragraph break]taso[comma] sina toki e ni taso: [te]mi pilin pona.[to]".
+</p></blockquote>
+
+<div class="pair">
+    <div>
+        <h3>sitelen Lasina la</h3><hr>
+        <blockquote class="transcript">
+            <p>sina pilin olin. sina lukin e jan pona. sina olin e sijelo wawa ona, e luka seli ona, e linja pimeja suli ona, e sinpin suwi ona kin. 
+            <p>
+            <p>taso, sina toki e ni taso: “mi pilin pona.”
+        </blockquote>
+        </div>
+    <div>
+        <h3>sitelen pona la</h3><hr>
+        <blockquote class="logographic transcript">
+            <p>sina pilin olin. sina lukin e jan pona. 
+            <p>sina olin e sijelo wawa ona 
+            <p>　　e luka seli ona 
+            <p>　　e linja pimeja suli ona 
+            <p>　　e sinpin suwi ona kin. 
+            <p>            
+            <p>taso sina toki e ni taso: te|mi pilin pona.|to
+        </blockquote>
+    </div>
+</div>
+
+
+
+<h2 class="sectionheading" id=''>§. o sitelen lon poka walo lon poka walo<h2>
+
+<div class="definition">
+    <p class="prototype"><b>say "[additionally indenting </b>(number)<b>]"</b></p>
+    <p>o sewi nanpa e nanpa pi poka walo (<i>current ideographic indentation level</i>).
+</div>
+
+<blockquote class="code"><p>
+Instead of listening to the entomologist:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;dentally say "jan pipi li toki e ni: [te]";<br>
+&nbsp;&nbsp;&nbsp;&nbsp;say "mi kama sona e pipi pi ma ni. [lob]mi alasa [additionally indenting 2]e pipi pi kalama wawa [ilob]e pipi pi kipisi kasi.[to][line break]".<br>
+</p></blockquote>
+
+<div class="pair">
+    <div>
+        <h3>sitelen Lasina la</h3><hr>
+        <blockquote class="transcript">
+            <p>jan pipi li toki e ni: “mi kama sona e pipi pi ma ni. mi alasa e pipi pi kalama wawa e pipi pi kipisi kasi.”
+        </blockquote>
+        </div>
+    <div>
+        <h3>sitelen pona la</h3><hr>
+        <blockquote class="logographic transcript">
+            <p>jan pipi li toki e ni: te|mi kama sona e pipi pi ma ni. 
+            <p>　　　　　　　　mi alasa e pipi pi kalama wawa 
+            <p>　　　　　　　　　　e pipi pi kipisi kasi.|to
+        </blockquote>
+    </div>
+</div>
+
+
+<!--The food critic is a person in the diner.
+[jan ni li suli mute. tan ni la, o wawa e nimi ona.]
+The printed name of the food critic is "[bold type]jan lawa moku[roman type]".
+
+Instead of greeting the food critic:
+    dentally say "sina toki e ni: [te]";
+    say "o kama pona. [ilob]sina wile moku e seme[?][to][paragraph break]";
+    dentally say "[food critic] li-->
+
+
+
+
+
+</p></blockquote>
+
+
+<h2 class="sectionheading">§. o sitelen e kulupu pi ijo mute lon poka walo<h2>
+
+<p>sitelen pona la, nimi <a href="#def-e-list">“[e (list of objects)]”</a> li ken toki kepeken walo. taso ona li wile e nanpa <i>current ideographic indentation level</i>. nasin tu ni li pona:
+
+<blockquote class="code"><p>
+    The initial appearance of the desk is "supa li suli. [lob]supa li jo [indenting 3][e list of things on the desk].".
+</p></blockquote>
+
+<p>anu la:
+
+<blockquote class="code"><p>
+    The initial appearance of the desk is "[fiddly desk appearance]".<br>
+    To say fiddly desk appearance:<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;dentally say "supa li suli. [lob]supa li jo ";<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;say "[e list of things on the desk]".
+</p></blockquote>
+
+<p>nasin tu ni li ken kama sama e ni:
+
+<div class="logographic transcript" lang="tok-sitelenpona">
+<p>supa li suli. 
+<p>supa li jo e kili
+<p>　　　e pan
+<p>　　　e poki‍telo.
+</div>
+
+<p>nimi pi supa “desk” li ken ante la nasin nanpa tu li anpa e nasin nanpa wan.
+
+<h2 class="sectionheading" id=''>§. o poki e nimi kepeken sitelen supa</h2>
+
+<p>sina wile ala wile toki kepeken sitelen supa?</p>
+
+<div class="definition">
+    <p class="prototype"><b>say "[long glyph]"</b> anu <b>say "[LG]"</b> / <b>say "[end long glyph]"</b> anu <b>say "[ELG]"</b>
+    <p>o supa e sitelen.
+    <p>“meli wawa pi[long glyph] ma lete[end long glyph]” li kama “<span class="logographic">meli wawa pi( ma lete)</span>”.
+    <p>“meli wawa pi[LG] ma lete[ELG]” li sama.
+    <p>kin la, “meli wawa [pi] ma lete[ELG]” li sama.
+</div>
+
+<!-- <blockquote class="code"><p>
+Long glyphs enabled is a truth state that varies. Long glyphs enabled is usually true.
+</p></blockquote>
+
+jan li musi e musi sina. sitelen supa li ike tawa jan ni, jan li ken should i even document this it's kind of pointless -->
+
+
+
+
+<h2 class="sectionheading" id=''>§. o toki e toki toki</h2>
+
+<p>jan li toki e toki pi jan ante lon musi sina la, sina wile e nimi tu ni.
+
+<div class="definition">
+    <p class="prototype"><b>say "[meta te]"</b>
+    <p>sitelen Lasina la, o toki e nimi <span class="tinyquote">‘</span>. (nimi <span class="tinyquote">‘</span> en nimi <span class="tinyquote">'</span> li ante lili. o lukin wawa.)
+    <p>sitelen pona la, o toki e <span class="logographic">“</span>.
+</div>
+
+<div class="definition">
+    <p class="prototype"><b>say "[meta to]"</b>
+    <p>sitelen Lasina la, o toki e nimi <span class="tinyquote">’</span>. (nimi <span class="tinyquote">’</span> en nimi <span class="tinyquote">'</span> li ante lili. o lukin wawa.)
+    <p>sitelen pona la, o toki e <span class="logographic">”</span>.
+</div>
+
+
+<h2 class="sectionheading" id=''>§. o nimi e sina lon lipu pi kama musi</h2>
+
+<p>musi ale li jo e lipu pi kama musi, sama ni:</p>
+
+<div class="transcript">
+    <strong style="font-size:1.133em">jan Osu pi wawa nasa</strong><br>
+    musi tan jan Sonja</br>
+    nanpa ‌1 / nanpa tenpo li ‌250214 / kepeken ilo Inform 7 v10.1.2
+</div>
+
+<p>musi sina li ken toki kepeken sitelen pona la musi sina li wile lawa e nimi <i>logographic story author</i>, sama ni:
+
+<blockquote class='code'><p class='quoted'>
+	"jan Osu pi wawa nasa" by jan Sonja<br>
+	<br>
+	The logographic story author is "jan [cartouche]sona olin nasa jasima alasa[end cartouche]".<br>
+</p></blockquote>
+
+<p>nimi pi musi sina li jo e nimi jan la musi sina li wile lawa e nimi <i>logographic story title</i> kin, sama ni:
+
+<blockquote class='code'><p class='quoted'>
+	The logographic story title is "jan [cartouche]o suli uta[end cartouche] pi wawa nasa".<br>
+</p></blockquote>
+
+<p>nasin ni la, lipu pi kama musi li ken pona kepeken sitelen pona:
+
+<div class="logographic transcript" lang="tok-sitelenpona">
+    <p><span style="font-size:1.233em">jan [o suli uta] pi wawa nasa</span>
+    <p>musi tan jan [sona olin nasa jasima alasa]
+    <p>nanpa ‌1 / nanpa tenpo li ‌250214 / kepeken ilo <span style="font-family:monospace;">Inform 7 v10.1.2</span>
+</div>
+
+
+
+[ todo o kin e ilo pi ante nimi........ ]
+
+
+<hr style="margin-bottom:20.8px; /*The Inform docs just use a blank chapterheading paragraph for this. */">
+
+
+<details>
+
+<summary>
+<div class="egnamecell">
+    <p class="egcuetext"><a href="#" class="eglink">
+    <img class="asterisk" alt="*" src="asterisk.png" />
+    <b><span class="egbanner">Example</span><span class="egname">o ante e sitelen</span></b></a><br>
+    jan li musi e musi sina la, jan li ken ante e sitelen.</p>
+</div>
+</summary>
+<div class="egpanel" id="example323" style="display: NOT NONE;">
+    <p>The most straightforward way to alter the response text for something in the standard rules is to select the Index tab, then select Actions, then pick the particular action whose text we'd like to alter. Under action details, there will be icons that look like speech bubbles.</p>
+    <p>Clicking on the speech bubble will show what the current response text is, and give us an option called &quot;set&quot;.</p>
+    <p>If we click &quot;set&quot;, this will automatically paste in the response name that we need to change. We can put this inside a &quot;when play begins&quot; rule in order to make that change take effect from the start of the game, like so:</p>
+    <!--START CODE "c4498_323"-->
+    <blockquote class="code"><p>
+    
+    Orthography toggling is an action out of world.<br>
+Understand "sitelen" or "sitelen pona ala/--" or "sitelen Lasina/Latin ala/--" or "font" or "orthography" or "sp" or "sl" as orthography toggling.<br>
+Carry out orthography toggling (this is the default orthography toggling rule):<br>
+&nbsp;&nbsp;&nbsp;&nbsp;if the current orthography is alphabetic:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;now the current orthography is logographic;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;now the command prompt is the appropriate command prompt;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;say "tenpo ni la musi ni li toki kepeken[long glyph] sitelen[~]pona[end long glyph].[paragraph break]";<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if glyph composition enabled is true:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;say "[te]toki pona[to] li sama [te]toki[~]pona[to].[line break]<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ni li ike [tawa] sina[ELG] la o [te][command style]sitelen tu[roman type][to].";<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;otherwise:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;say "sitelen tu ken ala wan.[line break]<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ni li ike [tawa] sina[ELG] la o [te][command style]sitelen tu[roman type][to].[paragraph break]";<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if long glyphs enabled is true:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;say "[te]kulupu pi waso lili li mu lon tomo waso.[to] li sama [te]kulupu [pi] waso lili[ELG] li mu [lon] tomo waso[ELG].[to].[line break]<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ni li ike [tawa] sina[ELG] la[comma] o [te][command style]sitelen supa[roman type][to].";<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;otherwise:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;say "sitelen ken ala supa.[line break]<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ni li ike [tawa] sina[ELG] la[comma] o [te][command style]sitelen supa[roman type][to].";<br>
+&nbsp;&nbsp;&nbsp;&nbsp;otherwise:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;now the current orthography is alphabetic;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;now the command prompt is the appropriate command prompt;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;say "tenpo ni la, musi ni li toki kepeken sitelen Lasina.".<br>
+<br>
+Long glyph toggling is an action out of world.<br>
+Understand "sitelen palisa ala/--" as long glyph toggling.<br>
+Carry out long glyph toggling (this is the default long glyph toggling rule):<br>
+&nbsp;&nbsp;&nbsp;&nbsp;if the current orthography is alphabetic:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;say "sina ken ala ante e sitelen palisa tan ni: tenpo ni la, musi ni li kepeken sitelen Lasina.<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;sina [te][command style]sitelen pona[roman type][to] la musi ni li kepeken sitelen pona.";<br>
+&nbsp;&nbsp;&nbsp;&nbsp;otherwise:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if long glyphs enabled is true:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;now long glyphs enabled is false;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;say "ante. tenpo ni la sitelen pi musi ni li ken ala palisa.";<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;otherwise:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;now long glyphs enabled is true;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;say "ante. tenpo ni la sitelen [pi] musi ni li ken palisa.<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[te]sitelen [pi] musi ni[ELG][to] li sama [te]sitelen pi musi ni[to].<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[te]pipi li mu [lon] kasi[ELG][to] li sama [te]pipi li mu lon kasi[to].".<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br>
+Glyph composition toggling is an action out of world.<br>
+Understand "sitelen wan/tu" as glyph composition toggling.<br>
+Carry out glyph composition toggling (this is the default glyph composition toggling rule):<br>
+&nbsp;&nbsp;&nbsp;&nbsp;if the current orthography is alphabetic:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;say "[roman type]tenpo ni, musi ni li kepeken sitelen Lasina.<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;sina [te][command style]sitelen pona[roman type][to] la musi ni kepeken sitelen pona.";<br>
+&nbsp;&nbsp;&nbsp;&nbsp;otherwise:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if glyph composition enabled is true:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;now glyph composition enabled is false;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;say "ante. tenpo ni la sitelen tu ken ala wan.<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[te]toki pona[to] li sitelen tu taso.";<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;otherwise:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;now glyph composition enabled is true;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;say "ante. tenpo ni la sitelen tu ken wan.<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[te]toki pona[to] li sama [te]toki[~]pona[to].".
+    
+    </p></blockquote>
+</div>
+
+</details>
+
+
+<hr style="margin-top:12.8px; /*The Inform docs just use a blank paragraph for this. */">
+
+
+<!--
+
+<h2 class="chapterheading" id=''>§. ijo lili ante</h2>
+
+
+
+
+
+???????????????????
+
+<div class="definition">
+    <p class="prototype"><b>ideographic length of </b>(text) <b>... number</b>
+    <p>o nanpa e nimi.
+</div>
+
+
+
+
+
+<hr><hr><hr><hr><hr><hr><hr><hr><hr><hr><hr><hr><hr><hr><hr><hr><hr><hr><hr><hr><hr><hr><hr><hr>
+
+
+
+
+-->
+
+
+<footer><p>Toki Pona by Vivian Rose 0.0.1</p></footer><hr>
+
+</body>
+</html>
+
+
+
+
+
+
