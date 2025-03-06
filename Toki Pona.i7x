@@ -1667,7 +1667,7 @@ Section: Adapting text about the player
 The "[mi]" phrase is equivalent to [html<a href='https://ganelson.github.io/inform-website/book/WI_14_4.html'>Inform's "[we]" phrase</a>html][omit]Inform's "[we]" phrase (described in §14.4. Adapting text about the player)[/omit]. It prints either "mi", "sina", or "ona", depending on the story viewpoint. Unless you plan to switch the story viewpoint, you probably won't need this phrase.
 
 
-Chapter: Other toki pona Considerations
+Chapter: Other Considerations
 
 Section: Translated Responses
 
@@ -1687,9 +1687,13 @@ The following verbs are not implemented by this extension, but are common enough
 <li>olin
 <li>toki
 <li>unpa
-<li>uta. "uta olin e [thing]" is understood as kissing, and "uta pilin e [thing]" is understood as tasting, but just "uta e [thing]" could mean kissing or tasting or biting or something else, so its implementation is left to the story author.
+<li>uta. "&gt;uta olin e [thing]" is understood as kissing, and "&gt;uta pilin e [thing]" is understood as tasting, but just "&gt;uta e [thing]" could mean kissing or tasting or biting or something else, so its implementation is left to the story author.
 </ul>
 html]
+
+Section: Understanding Our One Pronoun
+
+This extension provides support for understanding «ona» as a pronoun. See [html<a href="https://ganelson.github.io/inform-website/book/WI_17_18.html">html]§17.18. Changing the meaning of pronouns[html</a>html] for more on understanding pronouns.
 
 
 Chapter: Sitelen Pona
@@ -1707,15 +1711,17 @@ Section: Wait, how do we control which font is used?
 
 An Inform 7 story has no way of signaling a font preference to the interpreter. This extension assumes that some external mechanism ensures that the nasin nanpa font is used when `the current orthography is logographic`, and a more traditional font is used otherwise. This can be achieved on a web interpreter like Bisquixe or Vorple using custom CSS. On other interpreters, the player will probably have to manually set the font to nasin nanpa, and even then, the interpreter may not be able to display it properly.
 
+If you want the player to be able to switch between alphabetic and logographic mode, and you have some other mechanism to make sure that the presentation font changes as well, Example TODO offers some commands for configuring orthographic settings.
+
 
 
 Section: Cartouches
 
-Use "[cartouche]" and "[end cartouche]" to write cartouches. One example that works in either orthography:
+Use "[cartouche]" and "[end cartouche]" to write cartouches. This example works in either orthography, which is important if your story allows the player to choose how they would prefer to read it.
 
 	The printed name of Counterfeit Monkey is "lipu [if the current orthography is alphabetic]Kantape Manki[otherwise][cartouche]kama ante nimi toki anu pilin e[ideographic space]mani ale nimi kama ilo[end cartouche]".
 
-Or, to be concise:
+But we can be more concise:
 
 	The printed name of Counterfeit Monkey is "lipu [name]kama ante nimi toki anu pilin e[ideographic space]mani ale nimi kama ilo[end name]".
 
@@ -1755,8 +1761,6 @@ There is also a "long glyphs enabled" truth variable that, when false, causes lo
 
 
 Section: Indentation 
-
-TODO replace examples with those from lipu su?
 
 [html<i>html]lipu su[html</i>html] organizes long sentences with a nifty indentation technique, placing each repetition of «li» or «e» on its own line under the first. This extension defines the following phrases for emulating that style. The most basic of these is "[ideographic space]", which inserts an ideographic space, but we seldom need this on its own. Instead, we can use these phrases[omit], none of which do anything in alphabetic mode[/omit]:
 
@@ -1800,7 +1804,7 @@ html]In alphabetic mode, it simply says "sina wile e kili e pan e telo.".
 <p class="prototype"><b>say "[cilob]"</b></p>
 <p>Prints a comma if the orthography is alphabetic. Otherwise, prints a line break and an indent dependent on the <i>current ideographic indentation level</i>.</p>
 </div>
-html]"sina wile [indenting 2]e kili [cilob]e pan [cilob]e telo." is identical to the previous example for the logographic orthography, but in alphabetic mode it says "sina wile e kili, e pan, e telo.". This phrase is most useful for long, complex sentences that need broken up for readability regardless of the writing system.
+html]"sina wile [indenting 2]e kili [cilob]e pan [cilob]e telo." is identical to the previous example for the logographic orthography, but in alphabetic mode it says "sina wile e kili, e pan, e telo.". This phrase is most useful for long, complex sentences that need broken up for readability regardless of the writing system. If you plan for your story to [html<i>html]only[html</i>html] use sitelen pona, then don't bother remembering [cilob]; just use [ilob].
 
 Section: Advanced Indentation
 
@@ -1811,7 +1815,7 @@ For more complex cases, we might want a way to say some text while also setting 
 	To meet the Ozians:
 		say "ma ni la jan [name]tomo olin wile alasa suwi ijo[end name][indenting 11] li kama toki tawa jan lili mute [if the current orthography is alphabetic]Mansukin[else][cartouche]mu[end cartouche][end if][ilob] li toki tawa meli wawa pi ma lete".
 
-This requires manually counting the number of spaces to indent; laborious, but simple enough. But suppose that, in our hypothetical interactive adaptation of [html<i>html]lipu su[html</i>html], Dorothy's name might change depending on the player's actions, or may be yet-unrevealed. This would complicate the above example, since we would have to replace "11" with a calculated value based on the length of Dorothy's current moniker. Instead, we can use the "dentally say" phrase[omit], which says some text while also setting the current ideographic indentation level to the ideographic length of that text[/omit].
+This requires manually counting the number of spaces to indent; laborious, but simple enough. But suppose that, in our hypothetical interactive adaptation of [html<i>html]lipu su[html</i>html], Dorothy's name might change depending on the player's actions, or be yet-unrevealed. This would complicate the above example, since we would have to replace "11" with a calculated value dependent on the length of Dorothy's current moniker. Instead, we can use the "dentally say" phrase[omit], which says some text while also setting the current ideographic indentation level to the ideographic length of that text[/omit].
 
 [html
 <div class="definition" id="dentally-say">
@@ -1850,7 +1854,7 @@ For a non-su example, suppose we want to print several lines of dialogue from a 
 	Instead of showing the orchid mantis to the shopkeeper:
 		say "sina pana e [orchid mantis] [tawa] [shopkeeper][ELG].";
 		dentally say "[shopkeeper] li toki: [te]";
-		say "pipi ni li suwi mute a! [lob]taso mi esun ala e pipi.[to]".
+		say "pipi ni li suwi mute a! [ilob]taso mi esun ala e pipi.[to]".
 html]
 
 
