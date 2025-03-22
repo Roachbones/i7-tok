@@ -1,4 +1,4 @@
-Version 0.0.1 of Toki Pona by Vivian Rose begins here.
+Version 1.0.0 of Toki Pona by Vivian Rose begins here.
 
 "Translates the language of play to toki pona."
 
@@ -55,7 +55,7 @@ Part - Translated Grammar (in place of Part Six - Grammar in Standard Rules by G
 
 The understand token a time period translates into Inter as "RELATIVE_TIME_TOKEN".
 
-Chapter - Worldly Actions
+Chapter - Understand Worldly Actions
 
 Understand "alasa lon insa/-- [thing]" or "alasa insa e/-- [thing]" or "alasa lon [thing]" as searching.
 
@@ -144,16 +144,7 @@ Understand "pana e [other things] tawa/lon [thing]" as putting it on.
 
 Chapter - Directions
 
-Section - Understand a direction as going that direction
-
-[ The parser already kinda does this with builtin directions, but doesn't seem to catch on to their new names for some reason. These also don't seem to work:
-	Understand "[direction]" as going.
-	Understand "sewi" as going up. ]
-Ascending is an action applying to nothing. Understand "sewi" as ascending. Instead of ascending, try going up.
-Descending is an action applying to nothing. Understand "anpa" as descending. Instead of descending, try going down.
-Inside-going is an action applying to nothing. Understand "insa" as inside-going. Instead of inside-going, try going inside.
-
-Section - Rename Directions
+Section - Translate Directions
 
 Up, down, inside, and outside are privately-named.
 Understand "anpa" as down. The printed name of down is "anpa".
@@ -164,7 +155,17 @@ Understand "sewi" as up. The printed name of up is "sewi".
 [ Cardinal directions don't have good toki pona translations. ]
 North, south, east, west, northeast, southeast, northwest, and southwest are privately-named.
 
-Chapter - Out Of World Actions
+Section - Understand a direction as going that direction
+
+[ The parser already does this with builtin directions, but doesn't seem to catch on to their new names. These approaches also don't work:
+	Understand "[direction]" as going.
+	Understand "sewi" as going up.
+So we do this instead. ]
+Ascending is an action applying to nothing. Understand "sewi" as ascending. Instead of ascending, try going up.
+Descending is an action applying to nothing. Understand "anpa" as descending. Instead of descending, try going down.
+Inside-going is an action applying to nothing. Understand "insa" as inside-going. Instead of inside-going, try going inside.
+
+Chapter - Understand Out Of World Actions
 
 [ These ones are harder to translate. Some, I daresay, barely make literal sense in English. Some are IF jargon; others are computer interface terminology. So let's be merciful and understand the English commands for these. ]
 
@@ -184,7 +185,7 @@ Understand "nouns" or "pronouns" as requesting the pronoun meanings.
 Understand "notify" or "notify on" as switching score notification on.
 Understand "notify off" as switching score notification off.
 
-Part - Understanding Built-In Kinds
+Part - Understand Built-In Kinds
 
 Understand "ijo" as a thing.
 Understand "jan" as a non-animal person. Definition: something is non-animal if it is not an animal.
@@ -454,6 +455,8 @@ Include (-
 ];
 -) replacing "LanguageVerbMayBeName".
 
+
+
 Book - Particles and Lists
 
 Chapter - "anu" in "which do you mean" messages
@@ -642,6 +645,368 @@ After reading a command (this is the o razor rule):
 	if "[the player's command]" matches the regular expression "^o (.+)$":
 		change the text of the player's command to text matching subexpression 1.
 
+Chapter - Always interpret o commands as commands, not supplications of missing nouns
+
+[ This is the kludgiest chapter, lacking the elegance in implementation and documentation that you might find elsewhere in this extension, stemming from a desire to fix this inadequacy:
+
+	>o lukin e
+	sina wile lukin seme?
+
+	>o mu
+	seme? sina ken ala lukin e ijo ni.
+
+	>o mu
+	sina mu suwi.
+
+Here, the second command is interpreted as a continuation of the first, even though the second command's «o» should clarify it as a new command, not a noun completing the previous command.
+
+To solve this… Well, I would think that overriding the Language Kit's LanguageIsVerb stub could work, but LanguageIsVerb doesn't seem to get called when it needs to be, unless I define «o» as a verb anyway, which I *could* do by understanding "o [text]" as a mistake, but that seems kludgy too. So we resort to overriding the entirety of NounDomain to insert a check for «o». There is probably a better way!
+
+But while searching for a better way, I encountered an issue with the player's command becoming corrupted after the player supplies a missing noun. The fix for this *also* involves overriding NounDomain, so let's apply that too. Thus, the following code is from:
+
+	https://intfiction.org/t/disambiguation-check-failure-possibly-due-to-truncating/59441/7 (Thanks, Dr Peter Bates)
+	
+with a few lines inserted to convince the parser to interpret any command beginning with «o» as its own command. ]
+
+Include (-
+
+[ NounDomain domain1 domain2 context dont_ask first_word i j k l answer_words marker;
+	if ((parser_trace >= 4)) {
+		print "   [NounDomain called at word ";
+		print wn;
+		print " (domain1 ";
+		PrintShortName(domain1);
+		print ", domain2 ";
+		PrintShortName(domain2);
+		print ")^";
+		print "   ";
+		if (indef_mode) {
+			print "seeking indefinite object: ";
+			if (((indef_type)&(OTHER_BIT))) {
+				print "other ";
+			}
+			if (((indef_type)&(MY_BIT))) {
+				print "my ";
+			}
+			if (((indef_type)&(THAT_BIT))) {
+				print "that ";
+			}
+			if (((indef_type)&(PLURAL_BIT))) {
+				print "plural ";
+			}
+			if (((indef_type)&(LIT_BIT))) {
+				print "lit ";
+			}
+			if (((indef_type)&(UNLIT_BIT))) {
+				print "unlit ";
+			}
+			if ((indef_owner ~= 0)) {
+				print "owner:";
+				PrintShortName(indef_owner);
+			}
+			print "^";
+			print "   number wanted: ";
+			if ((indef_wanted == INDEF_ALL_WANTED)) {
+				print "all";
+			} else {
+				print indef_wanted;
+			}
+			print "^";
+			print "   most likely GNAs of names: ";
+			print indef_cases;
+			print "^";
+		} else {
+			print "seeking definite object^";
+		}
+	}
+	(match_length = 0);
+	(number_matched = 0);
+	(match_from = wn);
+	SearchScope(domain1, domain2, context);
+	if ((parser_trace >= 4)) {
+		print "   [ND made ";
+		print number_matched;
+		print " matches]^";
+	}
+	(wn = (match_from + match_length));
+	if ((number_matched == 0)) {
+		(wn)++;
+		rfalse;
+	}
+	if ((match_from <= num_words)) {
+		if ((number_matched == 1)) {
+			(i = (match_list-->(0)));
+			return i;
+		}
+		if ((wn <= num_words)) {
+			(i = NextWord());
+			(wn)--;
+			if ((i ~= AND1__WD or AND2__WD or AND3__WD or comma_word or THEN1__WD or THEN2__WD or THEN3__WD or BUT1__WD or BUT2__WD or BUT3__WD)) {
+				if ((lookahead == ENDIT_TOKEN)) {
+					rfalse;
+				}
+			}
+		}
+	}
+	(number_of_classes = 0);
+	if ((number_matched == 1)) {
+		(i = (match_list-->(0)));
+		if ((((indef_mode == 1)) && ((((indef_type)&(PLURAL_BIT)) ~= 0)))) {
+			if ((context == MULTI_TOKEN or MULTIHELD_TOKEN or MULTIEXCEPT_TOKEN or MULTIINSIDE_TOKEN or NOUN_TOKEN or HELD_TOKEN or CREATURE_TOKEN)) {
+				BeginActivity(DECIDING_WHETHER_ALL_INC_ACT, i);
+				if (((ForActivity(DECIDING_WHETHER_ALL_INC_ACT, i)) && (RulebookFailed()))) {
+					rfalse;
+				}
+				EndActivity(DECIDING_WHETHER_ALL_INC_ACT, i);
+			}
+		}
+	}
+	if ((number_matched > 1)) {
+		(i = 1);
+		if ((number_matched > 1)) {
+			for ((j = 0):(j < (number_matched - 1)):(j)++) {
+				if ((Identical((match_list-->(j)), (match_list-->((j + 1)))) == 0)) {
+					(i = 0);
+				}
+			}
+		}
+		if (i) {
+			(dont_infer = 1);
+		}
+		(i = Adjudicate(context));
+		if ((i == -1)) {
+			rfalse;
+		}
+		if ((i == 1)) {
+			rtrue;
+		}
+		(dont_infer_pronoun = 1);
+	}
+	if ((i ~= 0)) {
+		if (dont_infer) {
+			return i;
+		}
+		if ((inferfrom == 0)) {
+			(inferfrom = pcount);
+		}
+		((pattern-->(pcount)) = i);
+		return i;
+	}
+	if (dont_ask) {
+		return (match_list-->(0));
+	}
+	if ((match_from > num_words)) {
+		jump Incomplete;
+	}
+	BeginActivity(ASKING_WHICH_DO_YOU_MEAN_ACT);
+	if (ForActivity(ASKING_WHICH_DO_YOU_MEAN_ACT)) {
+		jump SkipWhichQuestion;
+	}
+	(j = 1);
+	(marker = 0);
+	for ((i = 1):(i <= number_of_classes):(i)++) {
+		while (((((match_classes-->(marker)) ~= i)) && (((match_classes-->(marker)) ~= (-(i)))))) {
+			(marker)++;
+		}
+		if ((~~(((match_list-->(marker)) has animate)))) {
+			(j = 0);
+		}
+	}
+	if (j) {
+		PARSER_CLARIF_INTERNAL_RM(65);
+	} else {
+		PARSER_CLARIF_INTERNAL_RM(66);
+	}
+	(j = number_of_classes);
+	(marker = 0);
+	for ((i = 1):(i <= number_of_classes):(i)++) {
+		while (((((match_classes-->(marker)) ~= i)) && (((match_classes-->(marker)) ~= (-(i)))))) {
+			(marker)++;
+		}
+		(k = (match_list-->(marker)));
+		if (((match_classes-->(marker)) > 0)) {
+			DefArt(k);
+		} else {
+			IndefArt(k);
+		}
+		if ((i < (j - 1))) {
+			print ", ";
+		}
+		if ((i == (j - 1))) {
+			if (((KIT_CONFIGURATION_BITMAP)&(SERIAL_COMMA_TCBIT))) {
+				if ((j ~= 2)) {
+					print ",";
+				}
+			}
+			PARSER_CLARIF_INTERNAL_RM(72);
+		}
+	}
+	print "?^";
+	.SkipWhichQuestion;
+	EndActivity(ASKING_WHICH_DO_YOU_MEAN_ACT);
+	.WhichOne;
+	(answer_words = Keyboard(buffer2, parse2));
+	(first_word = (parse2-->(1)));
+	if ((first_word == ALL1__WD or ALL2__WD or ALL3__WD or ALL4__WD or ALL5__WD)) {
+		if ((context == MULTI_TOKEN or MULTIHELD_TOKEN or MULTIEXCEPT_TOKEN or MULTIINSIDE_TOKEN)) {
+			(l = (multiple_object-->(0)));
+			for ((i = 0):(((i < number_matched)) && (((l + i) < MATCH_LIST_WORDS))):(i)++) {
+				(k = (match_list-->(i)));
+				((multiple_object-->(((i + 1) + l))) = k);
+			}
+			((multiple_object-->(0)) = (i + l));
+			rtrue;
+		}
+		PARSER_CLARIF_INTERNAL_RM(67);
+		jump WhichOne;
+	}
+	for ((i = 1):(i <= answer_words):(i)++) {
+		if ((WordFrom(i, parse2) == comma_word)) {
+			VM_CopyBuffer(buffer, buffer2);
+			jump RECONSTRUCT_INPUT;
+		}
+	}
+	if ((first_word == 0)) {
+		(j = wn);
+		(first_word = LanguageIsVerb(buffer2, parse2, 1));
+		(wn = j);
+	}
+	if ((first_word ~= 0)) {
+		(j = (first_word->(#dict_par1)));
+		if ((((0 ~= ((j)&(1)))) && ((~~(LanguageVerbMayBeName(first_word)))))) {
+			VM_CopyBuffer(buffer, buffer2);
+			jump RECONSTRUCT_INPUT;
+		}
+	}
+	(k = (WordAddress(match_from) - buffer));
+	(l = ((buffer2-->(0)) + 1));
+	for ((j = ((buffer + INPUT_BUFFER_LEN) - 1)):(j >= ((buffer + k) + l)):(j)-- ) {
+		((j->(0)) = (j->((-(l)))));
+	}
+	for ((i = 0):(i < l):(i)++) {
+		((buffer->((k + i))) = (buffer2->((WORDSIZE + i))));
+	}
+	((buffer->(((k + l) - 1))) = 32);
+	((buffer-->(0)) = ((buffer-->(0)) + l));
+	if (((buffer-->(0)) > (INPUT_BUFFER_LEN - WORDSIZE))) {
+		((buffer-->(0)) = (INPUT_BUFFER_LEN - WORDSIZE));
+	}
+	.RECONSTRUCT_INPUT;
+	(num_words = WordCount());
+	(players_command = (100 + num_words));
+	(wn = 1);
+	! By Dr Peter Bates:
+	!########################## INSERTION COMMENCES #################################
+	LanguageToInformese();
+	VM_Tokenise(buffer, parse);
+	!############################ INSERTION FINISHES ###################################
+	(num_words = WordCount());
+	(players_command = (100 + num_words));
+	(actors_location = ScopeCeiling(player));
+	FollowRulebook((Activity_after_rulebooks-->(READING_A_COMMAND_ACT)));
+	return REPARSE_CODE;
+	.Incomplete;
+	if ((context == CREATURE_TOKEN)) {
+		PARSER_CLARIF_INTERNAL_RM(68, actor);
+	} else {
+		PARSER_CLARIF_INTERNAL_RM(69, actor);
+	}
+	print "^";
+	(answer_words = Keyboard(buffer2, parse2));
+	for ((i = 1):(i <= answer_words):(i)++) {
+		if ((WordFrom(i, parse2) == comma_word)) {
+			VM_CopyBuffer(buffer, buffer2);
+			jump RECONSTRUCT_INPUT;
+		}
+	}
+	(first_word = (parse2-->(1)));
+
+	if ((first_word == 0)) {
+		(j = wn);
+		(first_word = LanguageIsVerb(buffer2, parse2, 1));
+		(wn = j);
+	}
+	
+	if ((first_word ~= 0)) {
+		
+		!\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/
+		! Insertion by Vivian Rose,
+		! to interpret any command beginning with «o» as its own command,
+		! even if the parser is asking for a missing noun.
+		if (first_word == 'o//') {
+			VM_CopyBuffer(buffer, buffer2);
+			jump RECONSTRUCT_INPUT;
+		}
+		!\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/
+		
+		(j = (first_word->(#dict_par1)));
+		if ((((0 ~= ((j)&(1)))) && ((~~(LanguageVerbMayBeName(first_word)))))) {
+			VM_CopyBuffer(buffer, buffer2);
+			jump RECONSTRUCT_INPUT;
+		}
+	}
+	if ((inferfrom ~= 0)) {
+		for ((j = inferfrom):(j < pcount):(j)++) {
+			if (((pattern-->(j)) == PATTERN_NULL)) {
+				continue;
+			}
+			(i = (WORDSIZE + (buffer-->(0))));
+			((buffer-->(0)))++;
+			((buffer->((i)++)) = 32);
+			if ((parser_trace >= 5)) {
+				print "[Gluing in inference at ";
+				print j;
+				print " with pattern code ";
+				print (pattern-->(j));
+				print "]^";
+			}
+			((parse2-->(1)) = 0);
+			if (((((pattern-->(j)) >= 2)) && (((pattern-->(j)) < REPARSE_CODE)))) {
+				if ((dont_infer_pronoun == 0)) {
+					PronounNotice((pattern-->(j)));
+					for ((k = 1):(k <= (LanguagePronouns-->(0))):(k = (k + 3))) {
+						if (((pattern-->(j)) == (LanguagePronouns-->((k + 2))))) {
+							((parse2-->(1)) = (LanguagePronouns-->(k)));
+							if ((parser_trace >= 5)) {
+								print "[Using pronoun '";
+								print (address) (parse2-->(1));
+								print "']^";
+							}
+							break;
+						}
+					}
+				}
+			} else {
+				((parse2-->(1)) = VM_NumberToDictionaryAddress(((pattern-->(j)) - REPARSE_CODE)));
+				if ((parser_trace >= 5)) {
+					print "[Using preposition '";
+					print (address) (parse2-->(1));
+					print "']^";
+				}
+			}
+			if (((parse2-->(1)) ~= 0)) {
+				(k = (buffer + i));
+				(k = Glulx_PrintAnyToArray((buffer + i), (INPUT_BUFFER_LEN - i), (parse2-->(1))));
+				(i = (i + k));
+				((buffer-->(0)) = (i - WORDSIZE));
+			}
+		}
+	}
+	(i = (WORDSIZE + (buffer-->(0))));
+	((buffer-->(0)))++;
+	((buffer->((i)++)) = 32);
+	for ((j = 0):(j < (buffer2-->(0))):((i)++,(j)++)) {
+		((buffer->(i)) = (buffer2->((j + WORDSIZE))));
+		((buffer-->(0)))++;
+		if (((buffer-->(0)) == INPUT_BUFFER_LEN)) {
+			break;
+		}
+	}
+	jump RECONSTRUCT_INPUT;
+];
+-) replacing "NounDomain".
+
+
 Chapter - Understand asking others to do things
 
 [The traditional IF syntax for asking another person to do something is "PERSON, COMMAND". For example, "ANDRA, KISS ME" or "ALEX, GET IN THE SYNTHESIZER". In toki pona, these would use the «o» particle: «jan Anwa o uta olin e mi» or «jan Alesa o, kama lon ilo pi kama wan». toki pona has no requirements for commas, but a comma might reasonably be used either before or after the «o».
@@ -654,7 +1019,7 @@ After reading a command when the player's command includes "o" (this is the conv
 	replace the regular expression ",? o,? " in T with ","; 
 	change the text of the player's command to T.
 
-Chapter - Understanding ale
+Chapter - Understand ale
 
 [Inform expects "all" to come before a noun, not after. So we must move "ale" from after a noun to before a noun. For example, this rule transforms >JO E MOKU ALE into JO E ALE MOKU.
 
@@ -929,7 +1294,7 @@ To decide what text is the appropriate command prompt (this is the prompt fleuro
 	otherwise:
 		decide on "❧".
 
-[ Parentheses are used for ligatures in nasin nanpa. Maybe we should have an alternative in case we really want to parenthesize in sitelen pona? Ideally we should just avoid parentheticals in nasin nanpa, but this can be a fallback. ]
+[ Parentheses are used for ligatures in nasin nanpa. Maybe we should have an alternative in case we really want to parenthesize in sitelen pona. Ideally we should avoid logographic parentheticals, but this can be a fallback. ]
 To say paren:
 	if the current orthography is alphabetic:
 		say "(";
@@ -1116,13 +1481,13 @@ Include (-[ VM_Describe_Release i;
 ];-) replacing "VM_Describe_Release".
 
 
-Book - No Articles
+Book - Omit English Articles
 
 [ Make sure we don't have "the"s or "an"s or "a"s hanging around. ]
 When play begins (this is the universal proper-naming rule):
 	now every object is proper-named.
 
-Book - mute toki - Overriding Default Responses
+Book - Override Default Responses
 
 The adjust light rule response (A) is "suno[~]ala li [lon] ni[ELG]. sina ken ala lukin!". ["[It] [are] [if story tense is present tense]now [end if]pitch dark in[if story tense is present tense]here[else]there[end if]!"]
 The generate action rule response (A) is "[paren]mi kute e ijo[~]mute taso[close paren]". ["(considering the first sixteen objects only)[command clarification break]".]
@@ -1211,7 +1576,7 @@ The parser clarification internal rule response (A) is "sina toki e jan[~]seme[?
 The parser clarification internal rule response (B) is "sina toki e ijo[~]seme[?] [lob]sina toki e ". ["Which do you mean, "]
 The parser clarification internal rule response (C) is "ijo wan taso ken. sina wile e ijo wan seme[?]". ["Sorry, you can only have one item here. Which exactly?"]
 The parser clarification internal rule response (D) is "sina wile [parser command so far] jan[~]seme[?]". ["Whom do you want [if the noun is not the player][the noun] [end if]to[parser command so far]?".]
-The parser clarification internal rule response (E) is "sina wile [parser command so far] seme[?]". ["What do you want [if the noun is not the player][the noun] [end if]to [parser command so far]?".]
+The parser clarification internal rule response (E) is "sina wile [parser command so far] seme[?]". ["What do you want [if the noun is not the player][the noun] [end if]to [parser command so far]?".] [TODO does this need "e" as well?]
 The parser clarification internal rule response (F) is "ona". ["those things"]
 The parser clarification internal rule response (G) is "ona". ["that"]
 The parser clarification internal rule response (H) is " ". [" or "]
@@ -1696,7 +2061,7 @@ Section: Understanding Our One Pronoun
 This extension provides support for understanding «ona» as a pronoun. See [html<a href="https://ganelson.github.io/inform-website/book/WI_17_18.html">html]§17.18. Changing the meaning of pronouns[html</a>html] for more on understanding pronouns.
 
 
-Chapter: Sitelen Pona
+Chapter: sitelen pona
 
 Section: The Story's Orthography
 
@@ -1804,7 +2169,7 @@ html]In alphabetic mode, it simply says "sina wile e kili e pan e telo.".
 <p class="prototype"><b>say "[cilob]"</b></p>
 <p>Prints a comma if the orthography is alphabetic. Otherwise, prints a line break and an indent dependent on the <i>current ideographic indentation level</i>.</p>
 </div>
-html]"sina wile [indenting 2]e kili [cilob]e pan [cilob]e telo." is identical to the previous example for the logographic orthography, but in alphabetic mode it says "sina wile e kili, e pan, e telo.". This phrase is most useful for long, complex sentences that need broken up for readability regardless of the writing system. If you plan for your story to [html<i>html]only[html</i>html] use sitelen pona, then don't bother remembering [cilob]; just use [ilob].
+html]"sina wile [indenting 2]e kili [cilob]e pan [cilob]e telo." is identical to the previous example for the logographic orthography, but in alphabetic mode it says "sina wile e kili, e pan, e telo.". This phrase is most useful for long, complex sentences that need broken up for readability regardless of the writing system. If you plan for your story to [html<i>html]only[html</i>html] use sitelen pona, then don't bother remembering "[cilob]"; just use "[ilob]".
 
 Section: Advanced Indentation
 
@@ -1864,7 +2229,7 @@ html]
 
 Section: Quotation Marks, or 「te & to」
 
-[html<i>html]lipu su[html</i>html]'s corner brackets are arguably [html<a href="https://sona.pona.la/wiki/te_and_to">particles</a>html][omit]particles[/omit], called te and to. They can be invoked thus:
+[html<i>html]lipu su[html</i>html]'s corner brackets are (arguably) [html<a href="https://sona.pona.la/wiki/te_and_to">particles</a>html][omit]particles[/omit], called te and to. They can be invoked thus:
 
 	say "sina toki: [te]mi wile moku.[to]".
 
@@ -1898,30 +2263,102 @@ The banner uses this in logographic mode. If your story title contains a cartouc
 
 Section: Supported fonts
 
-The sitelen pona font doesn't have to be nasin nanpa; it can be some other sitelen pona font with similar ligatures. If it uses different ligatures, you will have to override this extension's "Configuration Specific to the nasin nanpa Font" chapter, like so:
+The sitelen pona font doesn't have to be nasin nanpa; it can be some other sitelen pona font with similar ligatures. If it uses different ligatures (for example, it uses different characters for rendering combined glyphs), you will have to override this extension's "Configuration Specific to the nasin nanpa Font" chapter, like so:
 
 	*: Chapter - Some Other Font Support (in place of Configuration Specific to the nasin nanpa Font in Toki Pona by Vivian Rose):
 		[Lots of logic here]
 
-If you do go through the trouble of implementing support for your favorite sitelen pona font, consider sharing your code; it could be incorporated in another release of this extension.
+If you go through the trouble of implementing support for your favorite sitelen pona font, consider sharing your code; it could be incorporated in another release of this extension. UCSUR support is theoretically possible via i6 inclusion even though Inform 7 does not support such high codepoints.
 
 
 
+Example: * Orthographic Toggling - How we might allow the player to configure orthographic settings
 
+If we want our story to work in both sitelen pona and sitelen Lasina, then in addition to coding our prose carefully to work in both orthographies, we must also provide some mechanism for choosing which orthography to use. This example introduces three commands: one to change the orthography, and two to toggle some settings for sitelen pona display, in case the player happens to dislike combined or extended glyphs, or in case their interpreter displays them incorrectly due to spotty font support.
 
+	Orthography toggling is an action out of world.
+	Understand "sitelen" or "sitelen pona ala/--" or "sitelen Lasina/Latin ala/--" or "font" or "orthography" or "sp" or "sl" as orthography toggling.
+	Carry out orthography toggling (this is the default orthography toggling rule):
+		if the current orthography is alphabetic:
+			now the current orthography is logographic;
+			now the command prompt is the appropriate command prompt;
+			say "tenpo ni la musi ni li toki kepeken[long glyph] sitelen[~]pona[end long glyph].[paragraph break]";
+			if glyph composition enabled is true:
+				say "[te]toki pona[to] li sama [te]toki[~]pona[to].[line break]
+				ni li ike [tawa] sina[ELG] la o [te][command style]sitelen tu[roman type][to].";
+			otherwise:
+				say "sitelen tu ken ala wan.[line break]
+				ni li ike [tawa] sina[ELG] la o [te][command style]sitelen tu[roman type][to].[paragraph break]";
+			if long glyphs enabled is true:
+				say "[te]kulupu pi waso lili li mu lon tomo waso.[to] li sama [te]kulupu [pi] waso lili[ELG] li mu [lon] tomo waso[ELG].[to].[line break]
+				ni li ike [tawa] sina[ELG] la[comma] o [te][command style]sitelen supa[roman type][to].";
+			otherwise:
+				say "sitelen ken ala supa.[line break]
+				ni li ike [tawa] sina[ELG] la[comma] o [te][command style]sitelen supa[roman type][to].";
+		otherwise:
+			now the current orthography is alphabetic;
+			now the command prompt is the appropriate command prompt;
+			say "tenpo ni la, musi ni li toki kepeken sitelen Lasina.".
 
+	Long glyph toggling is an action out of world.
+	Understand "sitelen supa/palisa ala/--" as long glyph toggling.
+	Carry out long glyph toggling (this is the default long glyph toggling rule):
+		if the current orthography is alphabetic:
+			say "sina ken ala ante e sitelen supa tan ni: tenpo ni la, musi ni li toki kepeken sitelen Lasina.
+			
+			sina [te][command style]sitelen pona[roman type][to] la musi ni li toki kepeken sitelen pona.";
+		otherwise:
+			if long glyphs enabled is true:
+				now long glyphs enabled is false;
+				say "ante. tenpo ni la sitelen pi musi ni li ken ala supa.";
+			otherwise:
+				now long glyphs enabled is true;
+				say "ante. tenpo ni la sitelen [pi] musi ni li ken supa.
+				
+				[te]sitelen [pi] musi ni[ELG][to] li sama [te]sitelen pi musi ni[to].
+				[te]pipi li mu [lon] kasi[ELG][to] li sama [te]pipi li mu lon kasi[to].".
+				
+	Glyph composition toggling is an action out of world.
+	Understand "sitelen wan/tu" as glyph composition toggling.
+	Carry out glyph composition toggling (this is the default glyph composition toggling rule):
+		if the current orthography is alphabetic:
+			say "[roman type]tenpo ni, musi ni li toki kepeken sitelen Lasina.
+			
+			sina [te][command style]sitelen pona[roman type][to] la musi ni li toki kepeken sitelen pona.";
+		otherwise:
+			if glyph composition enabled is true:
+				now glyph composition enabled is false;
+				say "ante. tenpo ni la sitelen tu ken ala wan.
+				
+				[te]toki pona[to] li sitelen tu taso.";
+			otherwise:
+				now glyph composition enabled is true;
+				say "ante. tenpo ni la sitelen tu li ken wan.
+				
+				[te]toki pona[to] li sama [te]toki[~]pona[to].".
 
+By the way, "[command style]" is a way to format some text to resemble a command. Its implementation is just:
 
-Example: * The Nominarium - Showcasing various ways to name things.
+	Section - Style Suggested Commands Like Input (for use with Glulx Text Effects by Emily Short)
 
-For our story to work in both alphabetic and logographic orthographies, we should choose TODO
+	To say command style (this is the style example commands like input rule): say "[roman type][command prompt][input style]".
 
-	The story author is "jan Wiwijen". The logographic story author is "jan [cartouche]wan ijo wan ijo jaki en nanpa[end cartouche]".
+	Section - Style Suggested Commands Like Input (for use without Glulx Text Effects by Emily Short)
+
+	To say command style (this is the prefix example commands with the prompt rule): say "[command prompt]".
+
+This is not strictly a toki pona thing. However, lacking a storied history of toki pona text adventures, the player may struggle to intuit available command syntax. Highlighting suggested commands in the input style and prefacing them with the command prompt (“>”) can help get the point across. Some of this extension's default response substitutions make use of this. If you don't like this technique, feel free to replace the sections excerpted above with one like this:
+
+	Section - Ditch Command Style (replacing Style Suggested Commands Like Input in Toki Pona by Vivian Rose)
 	
+	To say command style: do nothing.
+
+[/EXAMPLE]
 
 
-
-
+Example: *** Conversation
+    
+[/EXAMPLE]
 
 
 

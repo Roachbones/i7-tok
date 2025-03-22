@@ -11,7 +11,13 @@
   <link href="indoc.css" rel="stylesheet" type="text/css">
   <style>    
     @font-face {font-family: "nasin nanpa"; src: url("nasin-nanpa-4.0.1.otf");}
+    
+    /* Override background colors.
+       The Inform manual is on white, and the Recipe Book is on yellow.
+       Let's go with something different. */
     body {background-color: #ffedff !important;}
+    div.egpanel{background-color: #eed0de !important;}
+    
     h1 {
         margin-top: 2em;
     }
@@ -98,7 +104,32 @@
     
     /* Examples */
     div.egnamecell {
-        margin-left: 60px;
+        ----margin-left: 60px;
+    }
+    summary::marker {content:"";}
+    summary {
+        cursor: pointer;
+        margin-bottom :12px;
+        display: flex;
+    }
+    
+    .egcellforoval {
+        margin-right: 10px;
+    }
+    
+    div.egovalfornumber {
+        background-image: none !important;
+    }
+    
+    .pill {
+        border-radius: 99px;
+        background-color: #6968ff;
+        width: 32px;
+        height: 23px;
+        box-shadow: 1px 1px 3px #0007;
+        display: flex;
+        align-items: center;
+        justify-content: center;
     }
     
   </style>
@@ -703,28 +734,33 @@ jan li musi e musi sina. sitelen supa li ike tawa jan ni, jan li ken should i ev
 
 
 
-[ todo o kin e ilo pi ante nimi........ ]
 
 
-<hr style="margin-bottom:20.8px; /*The Inform docs just use a blank chapterheading paragraph for this. */">
+<hr style="margin-bottom:20.8px; /*The Inform docs just use a blank chapterheading paragraph for this margin. */">
 
-
+<!-- You aren't really supposed to put block elements in a <summary> like this, but I still like this better than the JS implementation -->
 <details>
 
 <summary>
+
+<div class="egcellforoval">
+<div class="egovalfornumber overstruckimage"><div class="pill"><b>1</b></div></div>
+</div>
+
+
 <div class="egnamecell">
-    <p class="egcuetext"><a href="#" class="eglink">
-    <img class="asterisk" alt="*" src="asterisk.png" />
-    <b><span class="egbanner">Example</span><span class="egname">o ante e sitelen</span></b></a><br>
-    jan li musi e musi sina la, jan li ken ante e sitelen.</p>
+    <p class="egcuetext">
+    <img class="asterisk" alt="*" src="asterisk.png" /><img class="asterisk" alt="*" src="asterisk.png" />
+    <b><span class="egbanner">Example</span><span class="egname">o ante e sitelen</span></b><br>
+    jan li musi e musi sina la, jan li ken lawa e sitelen.</p>
 </div>
 </summary>
 <div class="egpanel" id="example323" style="display: NOT NONE;">
-    <p>TODO</p>
+    <p>musi sina li toki kepeken sitelen Lasina kepeken sitelen pona kin la, jan li ken lawa e sitelen kepeken nimi lawa ni.</p>
     <!--START CODE "c4498_323"-->
     <blockquote class="code"><p>
     
-    Orthography toggling is an action out of world.<br>
+Orthography toggling is an action out of world.<br>
 Understand "sitelen" or "sitelen pona ala/--" or "sitelen Lasina/Latin ala/--" or "font" or "orthography" or "sp" or "sl" as orthography toggling.<br>
 Carry out orthography toggling (this is the default orthography toggling rule):<br>
 &nbsp;&nbsp;&nbsp;&nbsp;if the current orthography is alphabetic:<br>
@@ -821,7 +857,7 @@ Carry out glyph composition toggling (this is the default glyph composition togg
 -->
 
 
-<footer><p>Toki Pona by Vivian Rose 0.0.1</p></footer><hr>
+<footer><p>Toki Pona by Vivian Rose 1.0.0</p></footer><hr>
 
 </body>
 </html>

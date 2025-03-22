@@ -67,6 +67,9 @@
     .deflink {
         cursor: help;
     }
+    img.su, .logographic {
+        border: 1px solid black;
+    }
   </style>
   <link href="indoc.css" rel="stylesheet" type="text/css">
 
@@ -85,10 +88,11 @@
 </ul><ul><li><a href='#2'>Chapter 2: Adaptive Text and Responses</a></li>
 <li><a href='#2.1'>§2.1. Talking about things</a></li>
 <li><a href='#2.2'>§2.2. Adapting text about the player</a></li>
-</ul><ul><li><a href='#3'>Chapter 3: Other toki pona Considerations</a></li>
+</ul><ul><li><a href='#3'>Chapter 3: Other Considerations</a></li>
 <li><a href='#3.1'>§3.1. Translated Responses</a></li>
 <li><a href='#3.2'>§3.2. Consider Implementing These Actions</a></li>
-</ul><ul><li><a href='#4'>Chapter 4: Sitelen Pona</a></li>
+<li><a href='#3.3'>§3.3. Understanding Our One Pronoun</a></li>
+</ul><ul><li><a href='#4'>Chapter 4: sitelen pona</a></li>
 <li><a href='#4.1'>§4.1. The Story&#x27;s Orthography</a></li>
 <li><a href='#4.2'>§4.2. Wait, how do we control which font is used?</a></li>
 <li><a href='#4.3'>§4.3. Cartouches</a></li>
@@ -203,7 +207,7 @@
 
 <p>The &quot;[mi]&quot; phrase is equivalent to <a href='https://ganelson.github.io/inform-website/book/WI_14_4.html'>Inform's "[we]" phrase</a>. It prints either &quot;mi&quot;, &quot;sina&quot;, or &quot;ona&quot;, depending on the story viewpoint. Unless you plan to switch the story viewpoint, you probably won&#x27;t need this phrase.</p>
 
-<hr><h1 class='chapterheading' id='3'>Chapter 3: Other toki pona Considerations</h1>
+<hr><h1 class='chapterheading' id='3'>Chapter 3: Other Considerations</h1>
 <h2 class='sectionheading' id='3.1'>§3.1. Translated Responses</h2>
 
 <p>This extension provides translations for default rule responses. You can view these in the extension source, or with the RESPONSES ALL command. See <a href="https://ganelson.github.io/inform-website/book/WI_14_10.html">§14.10. Responses</a> for how to override responses.</p>
@@ -224,8 +228,11 @@
 <li>uta. "&gt;uta olin e [thing]" is understood as kissing, and "&gt;uta pilin e [thing]" is understood as tasting, but just "&gt;uta e [thing]" could mean kissing or tasting or biting or something else, so its implementation is left to the story author.
 </ul>
 <p></p>
+<h2 class='sectionheading' id='3.3'>§3.3. Understanding Our One Pronoun</h2>
 
-<hr><h1 class='chapterheading' id='4'>Chapter 4: Sitelen Pona</h1>
+<p>This extension provides support for understanding «ona» as a pronoun. See <a href="https://ganelson.github.io/inform-website/book/WI_17_18.html">§17.18. Changing the meaning of pronouns</a> for more on understanding pronouns.</p>
+
+<hr><h1 class='chapterheading' id='4'>Chapter 4: sitelen pona</h1>
 <h2 class='sectionheading' id='4.1'>§4.1. The Story&#x27;s Orthography</h2>
 
 <p>This extension implements fancy typographic features for sitelen pona ­— or rather, it defines a number of phrases that leverage the features of sitelen pona fonts, <a href="https://github.com/ETBCOR/nasin-nanpa">nasin nanpa</a> in particular. This extension defines a variable called `the current orthography`, which can be `alphabetic` or `logographic`, and in the latter case, the game assumes that its interpreter is using a compatible sitelen pona font.</p>
@@ -423,30 +430,111 @@ Chapter - Where We&#x27;re Going We Don&#x27;t Need Logography (replacing Toggli
 </p></blockquote>
 <h2 class='sectionheading' id='4.10'>§4.10. Supported fonts</h2>
 
-<p>The sitelen pona font doesn&#x27;t have to be nasin nanpa; it can be some other sitelen pona font with similar ligatures. If it uses different ligatures, you will have to override this extension&#x27;s &quot;Configuration Specific to the nasin nanpa Font&quot; chapter, like so:</p>
+<p>The sitelen pona font doesn&#x27;t have to be nasin nanpa; it can be some other sitelen pona font with similar ligatures. If it uses different ligatures (for example, it uses different characters for rendering combined glyphs), you will have to override this extension&#x27;s &quot;Configuration Specific to the nasin nanpa Font&quot; chapter, like so:</p>
 
 <blockquote class='code'><p class='quoted'>
 Chapter - Some Other Font Support (in place of Configuration Specific to the nasin nanpa Font in Toki Pona by Vivian Rose):<br>
 	&nbsp;&nbsp;&nbsp;&nbsp;[Lots of logic here]<br>
 </p></blockquote>
-<p>If you do go through the trouble of implementing support for your favorite sitelen pona font, consider sharing your code; it could be incorporated in another release of this extension.</p>
+<p>If you go through the trouble of implementing support for your favorite sitelen pona font, consider sharing your code; it could be incorporated in another release of this extension. UCSUR support is theoretically possible via i6 inclusion even though Inform 7 does not support such high codepoints.</p>
 
 
 
+<p><details>
+    <summary>
+    <div class="egnamecell">
+        <p class="egcuetext"><a href="#" class="eglink"><img class="asterisk" alt="*" src="asterisk.png" /><b><span class="egbanner">Example</span><span class="egname">Orthographic Toggling</span></b></a><br>How we might allow the player to configure orthographic settings</p></p>
+    </div>
+    </summary>
+    <div class="egpanel">
 
-
-
-
-
-<p>Example: * The Nominarium - Showcasing various ways to name things.</p>
-
-<p>For our story to work in both alphabetic and logographic orthographies, we should choose TODO</p>
+<p>If we want our story to work in both sitelen pona and sitelen Lasina, then in addition to coding our prose carefully to work in both orthographies, we must also provide some mechanism for choosing which orthography to use. This example introduces three commands: one to change the orthography, and two to toggle some settings for sitelen pona display, in case the player happens to dislike combined or extended glyphs, or in case their interpreter displays them incorrectly due to spotty font support.</p>
 
 <blockquote class='code'><p class='quoted'>
-	The story author is &quot;jan Wiwijen&quot;. The logographic story author is &quot;jan [cartouche]wan ijo wan ijo jaki en nanpa[end cartouche]&quot;.<br>
-	<br>
+	Orthography toggling is an action out of world.<br>
+	Understand &quot;sitelen&quot; or &quot;sitelen pona ala/--&quot; or &quot;sitelen Lasina/Latin ala/--&quot; or &quot;font&quot; or &quot;orthography&quot; or &quot;sp&quot; or &quot;sl&quot; as orthography toggling.<br>
+	Carry out orthography toggling (this is the default orthography toggling rule):<br>
+	&nbsp;&nbsp;&nbsp;&nbsp;if the current orthography is alphabetic:<br>
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;now the current orthography is logographic;<br>
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;now the command prompt is the appropriate command prompt;<br>
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;say &quot;tenpo ni la musi ni li toki kepeken[long glyph] sitelen[~]pona[end long glyph].[paragraph break]&quot;;<br>
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if glyph composition enabled is true:<br>
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;say &quot;[te]toki pona[to] li sama [te]toki[~]pona[to].[line break]<br>
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ni li ike [tawa] sina[ELG] la o [te][command style]sitelen tu[roman type][to].&quot;;<br>
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;otherwise:<br>
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;say &quot;sitelen tu ken ala wan.[line break]<br>
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ni li ike [tawa] sina[ELG] la o [te][command style]sitelen tu[roman type][to].[paragraph break]&quot;;<br>
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if long glyphs enabled is true:<br>
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;say &quot;[te]kulupu pi waso lili li mu lon tomo waso.[to] li sama [te]kulupu [pi] waso lili[ELG] li mu [lon] tomo waso[ELG].[to].[line break]<br>
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ni li ike [tawa] sina[ELG] la[comma] o [te][command style]sitelen supa[roman type][to].&quot;;<br>
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;otherwise:<br>
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;say &quot;sitelen ken ala supa.[line break]<br>
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ni li ike [tawa] sina[ELG] la[comma] o [te][command style]sitelen supa[roman type][to].&quot;;<br>
+	&nbsp;&nbsp;&nbsp;&nbsp;otherwise:<br>
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;now the current orthography is alphabetic;<br>
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;now the command prompt is the appropriate command prompt;<br>
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;say &quot;tenpo ni la, musi ni li toki kepeken sitelen Lasina.&quot;.<br>
 </p></blockquote>
+<blockquote class='code'><p class='quoted'>
+	Long glyph toggling is an action out of world.<br>
+	Understand &quot;sitelen supa/palisa ala/--&quot; as long glyph toggling.<br>
+	Carry out long glyph toggling (this is the default long glyph toggling rule):<br>
+	&nbsp;&nbsp;&nbsp;&nbsp;if the current orthography is alphabetic:<br>
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;say &quot;sina ken ala ante e sitelen supa tan ni: tenpo ni la, musi ni li toki kepeken sitelen Lasina.<br>
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br>
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;sina [te][command style]sitelen pona[roman type][to] la musi ni li toki kepeken sitelen pona.&quot;;<br>
+	&nbsp;&nbsp;&nbsp;&nbsp;otherwise:<br>
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if long glyphs enabled is true:<br>
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;now long glyphs enabled is false;<br>
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;say &quot;ante. tenpo ni la sitelen pi musi ni li ken ala supa.&quot;;<br>
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;otherwise:<br>
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;now long glyphs enabled is true;<br>
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;say &quot;ante. tenpo ni la sitelen [pi] musi ni li ken supa.<br>
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br>
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[te]sitelen [pi] musi ni[ELG][to] li sama [te]sitelen pi musi ni[to].<br>
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[te]pipi li mu [lon] kasi[ELG][to] li sama [te]pipi li mu lon kasi[to].&quot;.<br>
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br>
+	Glyph composition toggling is an action out of world.<br>
+	Understand &quot;sitelen wan/tu&quot; as glyph composition toggling.<br>
+	Carry out glyph composition toggling (this is the default glyph composition toggling rule):<br>
+	&nbsp;&nbsp;&nbsp;&nbsp;if the current orthography is alphabetic:<br>
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;say &quot;[roman type]tenpo ni, musi ni li toki kepeken sitelen Lasina.<br>
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br>
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;sina [te][command style]sitelen pona[roman type][to] la musi ni li toki kepeken sitelen pona.&quot;;<br>
+	&nbsp;&nbsp;&nbsp;&nbsp;otherwise:<br>
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if glyph composition enabled is true:<br>
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;now glyph composition enabled is false;<br>
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;say &quot;ante. tenpo ni la sitelen tu ken ala wan.<br>
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br>
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[te]toki pona[to] li sitelen tu taso.&quot;;<br>
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;otherwise:<br>
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;now glyph composition enabled is true;<br>
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;say &quot;ante. tenpo ni la sitelen tu li ken wan.<br>
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br>
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[te]toki pona[to] li sama [te]toki[~]pona[to].&quot;.<br>
+</p></blockquote>
+<p>By the way, &quot;[command style]&quot; is a way to format some text to resemble a command. Its implementation is just:</p>
 
+<blockquote class='code'><p class='quoted'>
+	Section - Style Suggested Commands Like Input (for use with Glulx Text Effects by Emily Short)<br>
+</p></blockquote>
+<blockquote class='code'><p class='quoted'>
+	To say command style (this is the style example commands like input rule): say &quot;[roman type][command prompt][input style]&quot;.<br>
+</p></blockquote>
+<blockquote class='code'><p class='quoted'>
+	Section - Style Suggested Commands Like Input (for use without Glulx Text Effects by Emily Short)<br>
+</p></blockquote>
+<blockquote class='code'><p class='quoted'>
+	To say command style (this is the prefix example commands with the prompt rule): say &quot;[command prompt]&quot;.<br>
+</p></blockquote>
+<p>This is not strictly a toki pona thing. However, lacking a storied history of toki pona text adventures, the player may struggle to intuit available command syntax. Highlighting suggested commands in the input style and prefacing them with the command prompt (“&gt;”) can help get the point across. Some of this extension&#x27;s default response substitutions make use of this. If you don&#x27;t like this technique, feel free to replace the sections excerpted above with one like this:</p>
+
+<blockquote class='code'><p class='quoted'>
+	Section - Ditch Command Style (replacing Style Suggested Commands Like Input in Toki Pona by Vivian Rose)<br>
+	<br>
+	To say command style: do nothing.<br>
+</p></blockquote>
+<p></div></details></p>
 
 
 

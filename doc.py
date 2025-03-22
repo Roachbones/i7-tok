@@ -26,6 +26,8 @@ d = "\n".join(
     for line in d.split("\n")
 )
 
+#d, examples = d.split("[EXAMPLES]")
+
 chapter = 0
 section = 1
 
@@ -105,6 +107,20 @@ for phrase in ["name", "end name"]:
         new_d_lines.append(line)
     d = "\n".join(new_d_lines)'''
 
+
+
+d = re.sub(r"Example: (\*+) (.+) - (.+)", lambda match: """<details>
+    <summary>
+    <div class="egnamecell">
+        <p class="egcuetext"><a href="#" class="eglink">"""
+    +'<img class="asterisk" alt="*" src="asterisk.png" />'*len(match.group(1))
+    +'<b><span class="egbanner">Example</span><span class="egname">'+match.group(2)+'</span></b></a><br>'
+    +match.group(3)+"""</p>
+    </div>
+    </summary>
+    <div class="egpanel">""",d)
+d=d.replace("[/EXAMPLE]","</div></details>")
+    
 
 with open("doc.html", "w", encoding="utf8") as file:
     file.write(template.replace("{{here}}",d))
