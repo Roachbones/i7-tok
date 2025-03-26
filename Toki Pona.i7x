@@ -2173,7 +2173,7 @@ html]"sina wile [indenting 2]e kili [cilob]e pan [cilob]e telo." is identical to
 
 Section: Advanced Indentation
 
-[html <img src='su_sample_sample.png' alt='Sample page from lipu su' class='su'> html]
+[html <img src='Assets/su_sample_sample.png' alt='Sample page from lipu su' class='su'> html]
 
 For more complex cases, we might want a way to say some text while also setting the current ideographic indentation level to the length of that text. For example, consider the page of [html<i>html]lipu su[html</i>html] where Dorothy meets the munchkins.[omit] At time of writing, that page is hosted as a promotional example here: ( https://tokipona.org/su_sample.png ).[/omit] The only indented sentence on the page reads «ma ni la jan Towasi li kama toki tawa jan lili mute M[ansukin] li toki tawa meli wawa pi ma lete». The second «li» is printed on a second line under the first «li». To include this sentence in our prose, indented the same, we [html<i>html]could[html</i>html] use the phrases introduced in the previous section, like so:
 
