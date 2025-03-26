@@ -177,7 +177,7 @@
 
 <p></p>
 <p>In logographic mode, commas are never used, regardless of the above options. Instead, the list is printed on multiple lines, and indented, like this:</p>
-<div class="logographic" lang="tok-sitelenpona">
+<div class="logographic" lang="tok-sipo">
 <p>supa li suli. 
 <p>supa li jo e kili
 <p>　　　e pan
@@ -277,9 +277,9 @@ Chapter - Where We&#x27;re Going We Don&#x27;t Need Logography (replacing Toggli
 
 <h2 class='sectionheading' id='4.4'>§4.4. Compound Glyphs</h2>
 
-<p>The &quot;[~]&quot; phrase, terse to spare the proser&#x27;s hands, says a space if the current orthography is alphabetic, or a compound glyph joiner character otherwise. For example, &quot;toki[~]pona&quot; becomes &quot;toki pona&quot; in alphabetic mode, and  becomes <span class="logographic" lang="tok-sitelenpona">toki‍pona</span> in logographic mode.</p>
+<p>The &quot;[~]&quot; phrase, terse to spare the proser&#x27;s hands, says a space if the current orthography is alphabetic, or a compound glyph joiner character otherwise. For example, &quot;toki[~]pona&quot; becomes &quot;toki pona&quot; in alphabetic mode, and  becomes <span class="logographic" lang="tok-sipo">toki‍pona</span> in logographic mode.</p>
 
-<p>There is also a &quot;compound glyphs enabled&quot; truth variable that, when false, makes this phrase evaluate to a simple space regardless of orthography.</p>
+<p>There is also a &quot;compound glyphs enabled&quot; truth state variable that, when false, makes this phrase evaluate to a simple space regardless of orthography.</p>
 
 <h2 class='sectionheading' id='4.5'>§4.5. Long Glyphs</h2>
 
@@ -320,7 +320,7 @@ Chapter - Where We&#x27;re Going We Don&#x27;t Need Logography (replacing Toggli
 <p></p>
 
 <p>With these, we can say something like &quot;sina wile [indenting 2]e kili [ilob]e pan [ilob]e telo.&quot; This puts each «e {noun}» on its own line, forming an elegant column of «e»s. </p>
-<div class="logographic" lang="tok-sitelenpona">
+<div class="logographic" lang="tok-sipo">
 <p>sina wile e kili
 <p>　　e pan
 <p>　　e telo.
@@ -333,7 +333,7 @@ Chapter - Where We&#x27;re Going We Don&#x27;t Need Logography (replacing Toggli
 <p class="prototype"><b>say "[cilob]"</b></p>
 <p>Prints a comma if the orthography is alphabetic. Otherwise, prints a line break and an indent dependent on the <i>current ideographic indentation level</i>.</p>
 </div>
-<p>&quot;sina wile [indenting 2]e kili [cilob]e pan [cilob]e telo.&quot; is identical to the previous example for the logographic orthography, but in alphabetic mode it says &quot;sina wile e kili, e pan, e telo.&quot;. This phrase is most useful for long, complex sentences that need broken up for readability regardless of the writing system. If you plan for your story to <i>only</i> use sitelen pona, then don&#x27;t bother remembering [cilob]; just use [ilob].</p>
+<p>&quot;sina wile [indenting 2]e kili [cilob]e pan [cilob]e telo.&quot; is identical to the previous example for the logographic orthography, but in alphabetic mode it says &quot;sina wile e kili, e pan, e telo.&quot;. This phrase is most useful for long, complex sentences that need broken up for readability regardless of the writing system. If you plan for your story to <i>only</i> use sitelen pona, then don&#x27;t bother remembering &quot;[cilob]&quot;; just use &quot;[ilob]&quot;.</p>
 <h2 class='sectionheading' id='4.7'>§4.7. Advanced Indentation</h2>
 
 <p> <img src='su_sample_sample.png' alt='Sample page from lipu su' class='su'> </p>
@@ -367,7 +367,7 @@ Chapter - Where We&#x27;re Going We Don&#x27;t Need Logography (replacing Toggli
 
 <p>Might give us, depending on the status of the Kansan:</p>
 
-<div class="logographic" lang="tok-sitelenpona">
+<div class="logographic" lang="tok-sipo">
 <p>ma ni la jan lili li kama toki tawa jan lili mute [mu] 
 <p>　　　　　li toki tawa meli wawa pi ma lete
 <p>
@@ -394,7 +394,7 @@ Chapter - Where We&#x27;re Going We Don&#x27;t Need Logography (replacing Toggli
 
 <h2 class='sectionheading' id='4.8'>§4.8. Quotation Marks, or 「te &amp; to」</h2>
 
-<p><i>lipu su</i>'s corner brackets are arguably <a href="https://sona.pona.la/wiki/te_and_to">particles</a>, called te and to. They can be invoked thus:</p>
+<p><i>lipu su</i>'s corner brackets are (arguably) <a href="https://sona.pona.la/wiki/te_and_to">particles</a>, called te and to. They can be invoked thus:</p>
 
 <blockquote class='code'><p class='quoted'>
 	say &quot;sina toki: [te]mi wile moku.[to]&quot;.<br>
@@ -402,7 +402,7 @@ Chapter - Where We&#x27;re Going We Don&#x27;t Need Logography (replacing Toggli
 
 
 <p></p>
-<p>In logographic mode, these should show up as corner brackets: <span class="logographic" lang="tok-sitelenpona">sina toki: te|mi wile moku.|to</span></p>
+<p>In logographic mode, these should show up as corner brackets: <span class="logographic" lang="tok-sipo">sina toki: te|mi wile moku.|to</span></p>
 <p></p>
 
 
@@ -440,10 +440,10 @@ Chapter - Some Other Font Support (in place of Configuration Specific to the nas
 
 
 
-<p><details>
+<p><details id="#Orthographic">
     <summary>
     <div class="egnamecell">
-        <p class="egcuetext"><a href="#" class="eglink"><img class="asterisk" alt="*" src="asterisk.png" /><b><span class="egbanner">Example</span><span class="egname">Orthographic Toggling</span></b></a><br>How we might allow the player to configure orthographic settings</p></p>
+        <p class="egcuetext"><img class="asterisk" alt="*" src="asterisk.png" /><b><span class="egbanner">Example</span><span class="egname">Orthographic Toggling</span></b><br>How we might allow the player to configure orthographic settings</p></p>
     </div>
     </summary>
     <div class="egpanel">
@@ -537,12 +537,21 @@ Chapter - Some Other Font Support (in place of Configuration Specific to the nas
 <p></div></details></p>
 
 
+<p><details id="#Conversation">
+    <summary>
+    <div class="egnamecell">
+        <p class="egcuetext"><img class="asterisk" alt="*" src="asterisk.png" /><img class="asterisk" alt="*" src="asterisk.png" /><img class="asterisk" alt="*" src="asterisk.png" /><b><span class="egbanner">Example</span><span class="egname">Conversation</span></b><br>asdasdasd</p></p>
+    </div>
+    </summary>
+    <div class="egpanel">
+<p>    </p>
+<p></div></details></p>
 
 
 
 
 
-<hr><footer><p>for Version 0.0.1 of Toki Pona by Vivian Rose</p></footer><hr>
+<hr><footer><p>for Version 1.0.0 of Toki Pona by Vivian Rose</p></footer><hr>
 
 </body>
 </html>

@@ -2,7 +2,7 @@ Version 1.0.0 of Toki Pona by Vivian Rose begins here.
 
 "Translates the language of play to toki pona."
 
-[Once https://github.com/ganelson/inform-evolution/blob/main/proposals/0016-language-extensions-reform.md is released, this should be converted to the new format for language extensions. Until then, it shall be an extension.]
+[Once https://github.com/ganelson/inform-evolution/blob/main/proposals/0016-language-extensions-reform.md is released, this should be converted to the new format for language extensions. Until then, it shall be a normal extension.]
 
 Book - Translate Is-Usuallys
 
@@ -576,7 +576,7 @@ Chapter - Final Question Options
 
 Section - Translate Default Question Options
 
-To decide which topic is the topic (T - a topic): decide on T. [ hack https://intfiction.org/t/bubbling-beaker-awards-award-31-august-09-2024/64009/87?u=vi ]
+To decide which topic is the topic (T - a topic): decide on T. [ Hack from  https://intfiction.org/t/bubbling-beaker-awards-award-31-august-09-2024/64009/87 ]
 When play begins (this is the translate the final question options into toki pona rule):
 	choose row with a final question wording of "RESTART" in the Table of Final Question Options;
 	now the final question wording entry is "[command style]open sin[roman type]";
@@ -1082,7 +1082,7 @@ Include (-
         #Ifnot;
         j = parse2-->0;
         #Endif;
-        if (j == 1) { ! ← Changed this from (j) to (j==1). Instead of checking if at least one word was entered, we ensure that *exactly* one word was entered. This way, a player who types "lon ala" will be asked to say just "lon" or "ala". This still isn't ideal (it would be better to just interpret "lon ala" as no), but it's better than interpreting "lon ala" as yes.
+        if (j == 1) { ! ← Changed from (j) to (j==1). Instead of checking if at least one word was entered, we ensure that *exactly* one word was entered. This way, a player who types "lon ala" will be asked to say just "lon" or "ala". This still isn't ideal (it would be better to just interpret "lon ala" as no), but it's better than interpreting "lon ala" as yes.
             i = parse2-->1;
             if (i == YES1__WD or YES2__WD or YES3__WD) rtrue;
             if (i == NO1__WD or NO2__WD or NO3__WD) rfalse;
@@ -2109,7 +2109,7 @@ Section: Compound Glyphs
 
 The "[~]" phrase, terse to spare the proser's hands, says a space if the current orthography is alphabetic, or a compound glyph joiner character otherwise. For example, "toki[~]pona" becomes "toki pona" in alphabetic mode, and [html becomes <span class="logographic">toki‍pona</span>html][omit]should resemble the toki pona logo[/omit] in logographic mode.
 
-There is also a "compound glyphs enabled" truth variable that, when false, makes this phrase evaluate to a simple space regardless of orthography.
+There is also a "compound glyphs enabled" truth state variable that, when false, makes this phrase evaluate to a simple space regardless of orthography.
 
 
 Section: Long Glyphs
@@ -2356,7 +2356,7 @@ This is not strictly a toki pona thing. However, lacking a storied history of to
 [/EXAMPLE]
 
 
-Example: *** Conversation
+Example: *** Conversation - asdasdasd
     
 [/EXAMPLE]
 

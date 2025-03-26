@@ -1,6 +1,8 @@
 """
     “As a program, Indoc began as a rat's nest of Perl…”
         -Introduction to Indoc
+
+Perhaps this Python script evokes that same spirit. It turns the documentation in Toki Pona.i7x into an HTML manual.
 """
 
 import re
@@ -26,15 +28,13 @@ d = "\n".join(
     for line in d.split("\n")
 )
 
-#d, examples = d.split("[EXAMPLES]")
+# First, run through the whole thing to make a table of contents
 
 chapter = 0
 section = 1
 
 chapters = []
 sections = []
-
-
 
 d2 = ""
 for line in d.split("\n"):
@@ -61,12 +61,17 @@ for chapter_number, chapter_title in chapters:
     toc += "</ul>"
 toc += "</nav>"
 
+# Now make a lot of replacements to turn the documentation into HTML.
+
+# Omit [omit]text[/omit], even across multiple lines
 d = re.sub(r"\[omit].+?\[/omit]", "", d)
 d = re.sub(r"\[omit]\n(.+\n)+?\[/omit]", "", d)
 
+# Turn chapter/section headings into <h1>s and <h2>s
 d = re.sub("\n(Chapter (\d+).+)", "<hr><h1 class='chapterheading' id='\g<2>'>\g<1></h1>", d)
 d = re.sub(r"\n§(.+)\. (.+)", r"<h2 class='sectionheading' id='\g<1>'>§\g<1>. \g<2></h2>", d)
 
+# Turn bulleted lists made with the · character into HTML lists
 d = re.sub(
     r"(·.+\n)+",
     "<ul>\n\g<0></ul>",
@@ -74,6 +79,7 @@ d = re.sub(
 )
 d = re.sub(r"·(.+)", "<li>\g<1></li>", d) 
 
+# Turn tabbed code blocks into code blocks
 d = re.sub(r"\t.*", "\g<0><br>", d) 
 d = re.sub(
     r"(\t.+\n)+",
@@ -82,7 +88,7 @@ d = re.sub(
 )
 d = re.sub(r"\n([^<\n\t].+)", "\n<p>\\1</p>", d)
 
-
+# Anything formatted like [htmlthishtml] should be displayed as html. (It's omitted from the Inform 7 IDE.)
 d = re.sub(r"\[html(.+)html\]", lambda x: html.unescape(x.group(1)), d)
 d = d.replace("[html","").replace("html]","")
 d = d.replace("\t","&nbsp;"*4).replace("\n"+"&nbsp;"*4,"\n\t")
@@ -90,37 +96,30 @@ d = d.replace("\t","&nbsp;"*4).replace("\n"+"&nbsp;"*4,"\n\t")
 # omit paste buttons. todo replace with copy buttons..?
 d = d.replace("\n\t*: ", "\n")
 
-d = d.replace("class=\"logographic\"", "class=\"logographic\" lang=\"tok-sitelenpona\"")
-
-d = toc + d + "<hr><footer><p>for "+extension_name+"</p></footer><hr>"
-
-#d = re.sub(r"\[html\n(·.+\n)+\nhtml\\]", lambda x: html.unescape(x.group(1)), d)
-
-'''
-for phrase in ["name", "end name"]:
-    anchor="def-"+phrase.replace(" ","-")
-    assert anchor in d
-    new_d_lines = []
-    for line in d.split("\n"):
-        if line.startswith("\t") and line.endswith("<br>"):
-            line = line.replace("["+phrase+"]",'<a class="deflink" href="#{}">[{}]</a>'.format(anchor, phrase))
-        new_d_lines.append(line)
-    d = "\n".join(new_d_lines)'''
+# Unnecessary. Some languages have ISO codes for orthographies, but toki pona doesn't. But it could...?
+d = d.replace("class=\"logographic\"", "class=\"logographic\" lang=\"tok-sipo\"")
 
 
+# Format the examples
 
-d = re.sub(r"Example: (\*+) (.+) - (.+)", lambda match: """<details>
+d = re.sub(
+    r"Example: (\*+) (.+) - (.+)", lambda match: '<details id="#'+match.group(2).split(" ")[0]+"""\">
     <summary>
     <div class="egnamecell">
-        <p class="egcuetext"><a href="#" class="eglink">"""
+        <p class="egcuetext">"""
     +'<img class="asterisk" alt="*" src="asterisk.png" />'*len(match.group(1))
-    +'<b><span class="egbanner">Example</span><span class="egname">'+match.group(2)+'</span></b></a><br>'
+    +'<b><span class="egbanner">Example</span><span class="egname">'+match.group(2)+'</span></b><br>'
     +match.group(3)+"""</p>
     </div>
     </summary>
     <div class="egpanel">""",d)
 d=d.replace("[/EXAMPLE]","</div></details>")
-    
+
+
+
+# Lastly, add the footer.
+d = toc + d + "<hr><footer><p>for "+extension_name+"</p></footer><hr>"
+
 
 with open("doc.html", "w", encoding="utf8") as file:
     file.write(template.replace("{{here}}",d))
