@@ -15,7 +15,7 @@ from pygments.formatters import HtmlFormatter
 with open("template.html") as file:
     template = file.read()
 
-with open("Toki Pona.i7x") as file:
+with open("../Toki Pona.i7x") as file:
     i7x = file.read()
 
 extension_name = i7x.split(" begins here")[0]
@@ -107,7 +107,7 @@ d = re.sub(
     <summary>
     <div class="egnamecell">
         <p class="egcuetext">"""
-    +'<img class="asterisk" alt="*" src="asterisk.png" />'*len(match.group(1))
+    +'<img class="asterisk" alt="*" src="Assets/asterisk.png" />'*len(match.group(1))
     +'<b><span class="egbanner">Example</span><span class="egname">'+match.group(2)+'</span></b><br>'
     +match.group(3)+"""</p>
     </div>
