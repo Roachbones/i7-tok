@@ -1,4 +1,4 @@
-This Inform 7 extension changes the language of play to toki pona. For usage documentation in English, see [doc.html](http://rose.systems/i7-tok/doc). **sina wile kama sona kepeken toki pona taso la, o lukin e lipu [lipu_ilo.html](http://rose.systems/i7-tok/lipu_ilo)**. The English documentation can also be viewed in the Inform IDE with the extension installed.
+This Inform 7 extension changes the language of play to toki pona. For usage documentation in English, see [docs/usage.html](http://rose.systems/i7-tok/usage). **sina wile kama sona kepeken toki pona taso la, o lukin e lipu [docs/lipu_ilo.html](http://rose.systems/i7-tok/lipu_ilo)**. The English documentation can also be viewed in the Inform IDE with the extension installed.
 
 ## Contributing
 

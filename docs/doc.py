@@ -121,7 +121,7 @@ d=d.replace("[/EXAMPLE]","</div></details>")
 d = toc + d + "<hr><footer><p>for "+extension_name+"</p></footer><hr>"
 
 
-with open("doc.html", "w", encoding="utf8") as file:
+with open("usage.html", "w", encoding="utf8") as file:
     file.write(template.replace("{{here}}",d))
 
 
