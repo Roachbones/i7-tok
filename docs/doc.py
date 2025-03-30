@@ -8,6 +8,10 @@ Perhaps this Python script evokes that same spirit. It turns the documentation i
 import re
 import html
 
+from pygments import highlight
+from pygments.lexers import Inform7Lexer
+from pygments.formatters import HtmlFormatter
+
 with open("template.html") as file:
     template = file.read()
 
