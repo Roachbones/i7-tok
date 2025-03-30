@@ -1234,7 +1234,7 @@ To say ELG: say end long glyph. To say end long glyph:
 To say SOC: say cartouche. To say cartouche:
 	if the current orthography is logographic:
 		say "[bracket]".
-To say EOC: say end cartouche. To say end cartouche:
+To say EOC: say end cartouche. To say end cartouche -- running on:
 	if the current orthography is logographic:
 		say "[close bracket]".
 
@@ -1352,7 +1352,8 @@ Chapter - Warn about unended long glyphs
 
 Every turn (this is the scold unended long glyphs rule):
 	if currently printing a long glyph is true:
-		say "[fixed letter spacing]   Warning: A long glyph was printed this turn, but without an [bracket]end long glyph[close bracket] marker. You may have forgotten one.    [roman type]".
+		do nothing.
+		[say "[fixed letter spacing]   Warning: A long glyph was printed this turn, but without an [bracket]end long glyph[close bracket] marker. You may have forgotten one.    [roman type]".]
 
 Chapter - List Writer Bit Flips - Unindexed
 
