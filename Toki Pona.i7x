@@ -2271,9 +2271,9 @@ The sitelen pona font doesn't have to be nasin nanpa; it can be some other sitel
 
 If you go through the trouble of implementing support for your favorite sitelen pona font, consider sharing your code; it could be incorporated in another release of this extension. UCSUR support is theoretically possible via i6 inclusion even though Inform 7 does not support such high codepoints.
 
+[html<hr>html]
 
-
-Example: * Orthographic Toggling - How we might allow the player to configure orthographic settings
+Example: * Orthographic Toggling - How we might allow the player to configure orthographic settings.
 
 If we want our story to work in both sitelen pona and sitelen Lasina, then in addition to coding our prose carefully to work in both orthographies, we must also provide some mechanism for choosing which orthography to use. This example introduces three commands: one to change the orthography, and two to toggle some settings for sitelen pona display, in case the player happens to dislike combined or extended glyphs, or in case their interpreter displays them incorrectly due to spotty font support.
 
