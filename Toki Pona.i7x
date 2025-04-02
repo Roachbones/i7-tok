@@ -2077,7 +2077,7 @@ Section: Wait, how do we control which font is used?
 
 An Inform 7 story has no way of signaling a font preference to the interpreter. This extension assumes that some external mechanism ensures that the nasin nanpa font is used when `the current orthography is logographic`, and a more traditional font is used otherwise. This can be achieved on a web interpreter like Bisquixe or Vorple using custom CSS. On other interpreters, the player will probably have to manually set the font to nasin nanpa, and even then, the interpreter may not be able to display it properly.
 
-If you want the player to be able to switch between alphabetic and logographic mode, and you have some other mechanism to make sure that the presentation font changes as well, Example TODO offers some commands for configuring orthographic settings.
+If you want the player to be able to switch between alphabetic and logographic mode, and you have some other mechanism to make sure that the presentation font changes as well, [html<a href="#Orthographic">html]Example 1[html</a>html] offers some commands for configuring orthographic settings.
 
 
 
@@ -2357,7 +2357,7 @@ This is not strictly a toki pona thing. However, lacking a storied history of to
 [/EXAMPLE]
 
 
-Example: *** Conversation - Once this example is filled out, it will demonstrate a thorough implementation of the >TOKI command.
+Example: *** Talking - Once this example is filled out, it will demonstrate a thorough implementation of the >TOKI command, as used in [html<i>html]anpa ma[html</i>html].
 
 TODO.
 

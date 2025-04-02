@@ -103,7 +103,7 @@ d = d.replace("class=\"logographic\"", "class=\"logographic\" lang=\"tok-sipo\""
 # Format the examples
 
 d = re.sub(
-    r"Example: (\*+) (.+) - (.+)", lambda match: '<details id="#'+match.group(2).split(" ")[0]+"""\">
+    r"Example: (\*+) (.+) - (.+)", lambda match: '<details id="'+match.group(2).split(" ")[0]+"""\">
     <summary>
     <div class="egnamecell">
         <p class="egcuetext">"""
