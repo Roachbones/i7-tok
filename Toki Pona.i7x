@@ -2357,8 +2357,10 @@ This is not strictly a toki pona thing. However, lacking a storied history of to
 [/EXAMPLE]
 
 
-Example: *** Conversation - asdasdasd
-    
+Example: *** Conversation - Once this example is filled out, it will demonstrate a thorough implementation of the >TOKI command.
+
+TODO.
+
 [/EXAMPLE]
 
 
