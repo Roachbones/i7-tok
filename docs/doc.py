@@ -118,7 +118,7 @@ d=d.replace("[/EXAMPLE]","</div></details>")
 
 
 # Lastly, add the footer.
-d = toc + d + "<hr><footer><p>for "+extension_name+"</p></footer><hr>"
+d = toc + d + "<hr><footer><p>for <a href='https://github.com/Roachbones/i7-tok'>"+extension_name+"</a></p></footer><hr>"
 
 
 with open("usage.html", "w", encoding="utf8") as file:
