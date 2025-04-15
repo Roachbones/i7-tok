@@ -2128,7 +2128,7 @@ There is also a "long glyphs enabled" truth variable that, when false, causes lo
 
 Section: Indentation 
 
-[html<i>html]lipu su[html</i>html] organizes long sentences with a nifty indentation technique, placing each repetition of «li» or «e» on its own line under the first. This extension defines the following phrases for emulating that style. The most basic of these is "[ideographic space]", which inserts an ideographic space, but we seldom need this on its own. Instead, we can use these phrases[omit], none of which do anything in alphabetic mode[/omit]:
+[html<i>html]lipu su[html</i>html] organizes long sentences with a nifty indentation technique, placing each repetition of [html<span class="logographic">li</span> or <span class="logographic">e</span>html][omit]«li» or «e»[/omit] on its own line under the first. This extension defines the following phrases for emulating that style. The most basic of these is "[ideographic space]", which inserts an ideographic space, but we seldom need this on its own. Instead, we can use these phrases[omit], none of which do anything in alphabetic mode[/omit]:
 
 [omit]
 · "[indenting {number}]" says nothing; it only sets the current ideographic indentation level to the specified number.
