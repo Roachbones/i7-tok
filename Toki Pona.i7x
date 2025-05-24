@@ -235,6 +235,12 @@ To say ona:
 	otherwise:
 		say "ona".
 
+To say ona li:
+	if the prior named object is the player:
+		say "[mi]";
+	otherwise:
+		say "ona li".
+
 Chapter - li
 
 [ The article «li» is omitted for sentences with the subject "mi" or "sina". This phrase lets us say something like "[noun li] poki ala.". If the noun is the player (when referred to with sina/mi), the "li" gets correctly omitted. ]
@@ -2027,6 +2033,8 @@ Yielding:
 	
 	>nena e mi
 	kon sina li nasa ala.
+
+Similarly, "[ona li]" says "ona li", unless the noun is the player.
 
 Section: Adapting text about the player
 
