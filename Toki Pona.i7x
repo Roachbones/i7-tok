@@ -522,7 +522,7 @@ Chapter - Listing contents of containers and rooms
 	>lukin e poki moku
 	ona li awen e moku sina.
 
-	poki moku jo e kili, e pan, e lipu.
+	poki moku li jo e kili, e pan, e lipu.
 ]
 
 [ Indent things listed in a container. This also affects the you-can-also-see rule and the reveal any newly visible interior rule. ]
