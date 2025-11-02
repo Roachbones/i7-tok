@@ -1122,7 +1122,7 @@ Glyph composition enabled is a truth state that varies. Glyph composition enable
 
 Chapter - Logographic Typesetting
 
-[ [if az] and [if lg] may be useful shorthand in text substitutions if the other substitutions defined here fall short. ]
+[ [if az] and [if lg] may be useful shorthand if the other substitutions defined here fall short. ]
 To decide if az: if the current orthography is alphabetic, yes; no.
 To decide if lg: if the current orthography is logographic, yes; no. 
 
