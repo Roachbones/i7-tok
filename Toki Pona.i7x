@@ -1,4 +1,4 @@
-Version 1.0.0 of Toki Pona by Vivian Rose begins here.
+Version 1.0.1-dev of Toki Pona by Vivian Rose begins here.
 
 "Translates the language of play to toki pona."
 
@@ -130,6 +130,7 @@ Understand "tawa [something enterable]" as entering.
 Understand "tawa [door]" as entering.
 Understand "tawa insa [something]" as entering.
 Understand "tawa weka" as exiting.
+Understand "tawa tan tomo" as exiting.
 Understand the command "t" as "tawa".
 
 Understand "uta olin e [something]" or "olin uta e [something]" as kissing. [ "uta e" left to you; is it kissing or tasting or something else? ]
@@ -140,6 +141,8 @@ Understand "weka" as exiting.
 Understand "weka e [things preferably held]" as dropping.
 Understand "weka e [other things] tawa/lon [container]" as inserting it into.
 Understand "weka e [other things] tawa/lon [supporter]" as putting it on.
+Understand "weka tan tomo" as exiting.
+
 Understand "pana e [other things] tawa/lon [thing]" as putting it on.
 
 Chapter - Directions
