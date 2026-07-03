@@ -1490,6 +1490,27 @@ Include (-[ VM_Describe_Release i;
 	for (i=0 : i<6 : i++) print (char) HDR_GAMESERIAL->i;
 ];-) replacing "VM_Describe_Release".
 
+Chapter - Translate Version Announcement
+
+[ This will be easier in Inform version 11 when this is just a rule. For now we need another i6 override. ]
+
+Include (-[ ANNOUNCE_STORY_FILE_VERSION_R ix;
+	if (actor ~= player) rfalse;
+	Banner();
+	print "ilo Inform 7 v", (PrintI6Text) I7_FULL_VERSION_NUMBER, "^"; ! "Inform 7 v" → "ilo Inform 7 v"
+	if (UUID_ARRAY->0 >= 6) {
+		print "nanpa nimi: "; ! "Identification number: " → "nanpa nimi: "
+		for (ix=6: ix <= UUID_ARRAY->0: ix++) print (char) UUID_ARRAY->ix;
+		print "^";
+	}
+	@gestalt 1 0 ix;
+	print "ilo nanpa ", ix / $10000, ".", (ix & $FF00) / $100, ! "Interpreter version " → "ilo nanpa "
+	".", ix & $FF, " / ";
+	@gestalt 0 0 ix;
+	print "VM ", ix / $10000, ".", (ix & $FF00) / $100, ".", ix & $FF, "^";
+	ShowExtensionVersions();
+	say__p = 1;
+];-) replacing "ANNOUNCE_STORY_FILE_VERSION_R".
 
 Book - Omit English Articles
 
