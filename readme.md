@@ -2,7 +2,7 @@ This Inform 7 extension changes the language of play to toki pona. For usage doc
 
 ## Current status
 
-No functional changes since written for *anpa ma*.
+A few improvements since written for *anpa ma*.
 
 Usage documentation could use more examples. The examples should probably be stored as their own files and inserted into documentation with a Python script, but that currently only happens for the English documentation, not the toki pona version.
 

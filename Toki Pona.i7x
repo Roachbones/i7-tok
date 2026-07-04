@@ -2,7 +2,7 @@ Version 1.0.1-dev of Toki Pona by Vivian Rose begins here.
 
 "Translates the language of play to toki pona."
 
-[Once https://github.com/ganelson/inform-evolution/blob/main/proposals/0016-language-extensions-reform.md is released, this should be converted to the new format for language extensions. Until then, it shall be a normal extension.]
+[Once https://github.com/ganelson/inform-evolution/blob/main/proposals/0016-language-extensions-reform.md is released, this should be converted to the new format for language extensions.]
 
 Book - Translate Is-Usuallys
 
@@ -195,14 +195,14 @@ Understand "jan" as a non-animal person. Definition: something is non-animal if 
 Understand "lupa" as a door.
 Understand "moku" as something edible.
 Understand "poki" as a container.
-Understand "soweli" as an animal. [ May be inappropriate. Are all animals soweli? Probably not. ]
+Understand "soweli" as an animal. [ May be inappropriate for some animals. ]
 Understand "supa" as a supporter.
 
 Book - Grammatical Phrases
 
 Chapter - Saying Pronouns
 
-[ "[mi]" is our equivalent to "[we]" or "[us]". ]
+[ "[mi]" is like "[we]" or "[us]". ]
 
 Rule for printing the name of yourself: say "[mi]".
 
@@ -212,7 +212,7 @@ To say mi:
 		say "mi";
 	if the story viewpoint is second person singular or the story viewpoint is second person plural:
 		say "sina";
-	if the story viewpoint is third person singular or the story viewpoint is third person plural: [ I don't recommend this one, but it's here just in case. ]
+	if the story viewpoint is third person singular or the story viewpoint is third person plural: [ I don't recommend this one. ]
 		say "ona".
 To say mi li:
 	if the story viewpoint is third person singular or the story viewpoint is third person plural:
@@ -220,7 +220,7 @@ To say mi li:
 	otherwise:
 		say "[mi]".
 
-[ The "[ona]" phrase might be handy for responses like this:
+[ "[ona]" is handy for responses like this:
 
 	Instead of smelling something, say "kon [regarding the noun][ona] li nasa ala.".
 
@@ -246,7 +246,7 @@ To say ona li:
 
 Chapter - li
 
-[ The article «li» is omitted for sentences with the subject "mi" or "sina". This phrase lets us say something like "[noun li] poki ala.". If the noun is the player (when referred to with sina/mi), the "li" gets correctly omitted. ]
+[ «li» is omitted after the subject «mi» or «sina». This next phrase lets us say something like "[noun li] poki ala.". If the noun is the player (when referred to with sina/mi), «li» is omitted. ]
 
 To say (N - object) li:
 	if N is yourself:
@@ -319,8 +319,6 @@ In logographic mode, no commas are used, and the list is indented, sort of like 
 	supa li jo e kili
 	              e pan
 	              e poki telo. ]
-
-
 
 Use no commas for direct objects translates as (- Constant TOK_OMIT_EN_COMMAS; -).
 
@@ -411,7 +409,7 @@ Include (- Constant RESTORE__WD = 'restore'; -) replacing "RESTORE__WD".
 
 Chapter - Pronoun
 
-[ This lets the story understand "ona". ]
+[ Understand «ona». ]
 Include (-
 Array LanguagePronouns table
     'ona' $$1111111111111111 NULL;
@@ -419,6 +417,7 @@ Array LanguagePronouns table
 
 Chapter - Descriptors
 
+[TODO remove; these would need to be on the other side of the word anyway]
 Include (-
 Array LanguageDescriptors table
     'mi'      $$111111111111    POSSESS_PK      0
@@ -438,7 +437,7 @@ Chapter - Commands
 
 Section - LanguageVerb
 
-[This is so that the command "i asdasd" gives a response like "I only understood you as far as wanting to take inventory." instead of "I only understood you as as far as wanting to i.".]
+[This is so the command "i asdasd" gives a response like "I only understood you as far as wanting to take inventory." instead of "I only understood you as as far as wanting to i.".]
 Include (-
 [ LanguageVerb i;
     switch (i) {
@@ -455,7 +454,7 @@ Section - LanguageVerbMayBeName
 
 [ From English Language Kit:
 	LanguageVerbMayBeName is called by NounDomain when dealing with the player's reply to a "Which do you mean, the short stick or the long stick?" prompt from the parser. If the reply is another verb (for example, LOOK) then then previous ambiguous command is discarded unless it is one of these words which could be both a verb and an adjective in a name property.
-Well, there's a lot of this overlap in toki pona. Let's just specify these for now; this may need revisiting depending on the actions and nouns implemented by the story. ]
+There's a lot of this overlap in toki pona. Let's just specify these for now; this may need revisiting depending on the story's actions and nouns. ]
 Include (-
 [ LanguageVerbMayBeName w;
     if (w == 'ilo' or 'lipu' or 'seli' or 'ku')
@@ -463,7 +462,6 @@ Include (-
     rfalse;
 ];
 -) replacing "LanguageVerbMayBeName".
-
 
 
 Book - Particles and Lists
@@ -562,10 +560,10 @@ Rule for printing room description details of something (this is the omit conten
 Chapter - Listing contents of a supporter
 
 [ The output of the examine supporters rule reads better if we rephrase it. 
-"ijo en pipi li lon supa" makes more sense to be than "supa li jo e ijo e pipi" for supporters.
-This could work for containers, too… but somehow I'm more okay with containers using "jo" to describe their contents.
+«ijo en pipi li lon supa» makes more sense to be than «supa li jo e ijo e pipi» for supporters.
+This could work for containers, too, but somehow I'm more okay with containers using «jo» to describe their contents.
 Like, if some bread is in my pantry, then my pantry has the bread. But if my bread is on the table, does my table really *have* the bread?
-Making these judgments is part of toki pona. Here's my judgment: let's use jo for containers and lon for supporters.]
+Let's use «jo» for containers and «lon» for supporters.]
 
 [ We want the use initial appearance in room descriptions rule to list the items *before* the supporter, but that rule doesn't make its final string an overridable Response, which makes this trickier. ]
 
@@ -600,10 +598,10 @@ When play begins (this is the translate the final question options into toki pon
 	now the final question wording entry is "[command style]monsi [roman type]e tenpo wan";
 	now the topic entry is the topic "o/-- monsi e/-- tenpo/-- wan/--".
 
-Section - Understand Understandably Ununderstanding Undoers
+Section - Understand Undo
 
 [ Recognize the whole ">monsi e tenpo wan" command at other times, too. Except we can't actually do that, so just tell the player to be terse. ]
-After reading a command (this is the trim verbose undo command rule): [TODO replace monsi]
+After reading a command (this is the trim verbose undo command rule):
 	if the player's command matches "monsi e tenpo wan":
 		say "o sitelen e ni taso: [command style]monsi[roman type]";
 		reject the player's command.
@@ -656,7 +654,7 @@ After reading a command (this is the o razor rule):
 
 Chapter - Always interpret o commands as commands, not supplications of missing nouns
 
-[ This is the kludgiest chapter, lacking the elegance in implementation and documentation that you might find elsewhere in this extension, stemming from a desire to fix this inadequacy:
+[ This is the kludgiest chapter, lacking the elegance in implementation and documentation you might find elsewhere in this extension, stemming from a desire to fix this inadequacy:
 
 	>o lukin e
 	sina wile lukin seme?
@@ -669,7 +667,7 @@ Chapter - Always interpret o commands as commands, not supplications of missing 
 
 Here, the second command is interpreted as a continuation of the first, even though the second command's «o» should clarify it as a new command, not a noun completing the previous command.
 
-To solve this… Well, I would think that overriding the Language Kit's LanguageIsVerb stub could work, but LanguageIsVerb doesn't seem to get called when it needs to be, unless I define «o» as a verb anyway, which I *could* do by understanding "o [text]" as a mistake, but that seems kludgy too. So we resort to overriding the entirety of NounDomain to insert a check for «o». There is probably a better way!
+To solve this, I would think that overriding the Language Kit's LanguageIsVerb stub could work, but LanguageIsVerb doesn't seem to get called when it needs to be, unless I define «o» as a verb anyway, which I *could* do by understanding "o [text]" as a mistake, but that seems kludgy too. So we resort to overriding the entirety of NounDomain to insert a check for «o». There is probably a better way!
 
 But while searching for a better way, I encountered an issue with the player's command becoming corrupted after the player supplies a missing noun. The fix for this *also* involves overriding NounDomain, so let's apply that too. Thus, the following code is from:
 
@@ -1018,9 +1016,9 @@ Include (-
 
 Chapter - Understand asking others to do things
 
-[The traditional IF syntax for asking another person to do something is "PERSON, COMMAND". For example, "ANDRA, KISS ME" or "ALEX, GET IN THE SYNTHESIZER". In toki pona, these would use the «o» particle: «jan Anwa o uta olin e mi» or «jan Alesa o, kama lon ilo pi kama wan». toki pona has no requirements for commas, but a comma might reasonably be used either before or after the «o».
+[Traditional IF syntax for asking another person to do something is "PERSON, COMMAND". For example, "ANDRA, KISS ME" or "ALEX, GET IN THE SYNTHESIZER". In toki pona, these would use the «o» particle: «jan Anwa o uta olin e mi» or «jan Alesa o, kama lon ilo pi kama wan». toki pona has no requirements for commas, but a comma might reasonably be used before or after the «o».
 
-To understand these commanding commands in toki pona, let's filter the player's command to replace " o " with ", ", while watching out for a potential preexisting comma on either side of the «o».]
+To understand these commanding commands in toki pona, we filter the player's command to replace " o " with ", " while watching out for a potential preexisting comma on either side of the «o».]
 
 The convert command commands from toki pona to traditional syntax rule is listed after the o razor rule in the after reading a command rules.
 After reading a command when the player's command includes "o" (this is the convert command commands from toki pona to traditional syntax rule):
@@ -1035,7 +1033,7 @@ Chapter - Understand ale
 Ideally, this should probably be done with "ante" as well.]
 
 After reading a command (this is the ale shuffling rule):
-	[ We already added "ali" as ALL2__WD so it would be understood as "all", but let's replace it with ale anyway so that this next replacement is easier. ]
+	[ We already added "ali" as ALL2__WD so it would be understood as "all", but let's replace it with ale anyway to simplify the rest of this rule. ]
 	if the player's command includes "ali":
 		replace the matched text with "ale";
 	if the player's command includes "ale": [← This line is necessary; otherwise we mess up the parser's asking which noun when the player does not supply a noun. ]
@@ -1091,7 +1089,7 @@ Include (-
         #Ifnot;
         j = parse2-->0;
         #Endif;
-        if (j == 1) { ! ← Changed from (j) to (j==1). Instead of checking if at least one word was entered, we ensure that *exactly* one word was entered. This way, a player who types "lon ala" will be asked to say just "lon" or "ala". This still isn't ideal (it would be better to just interpret "lon ala" as no), but it's better than interpreting "lon ala" as yes.
+        if (j == 1) { ! ← Changed from (j) to (j==1). Instead of checking if at least one word was entered, ensure *exactly* one word was entered. This way, a player who types "lon ala" will be asked to say just "lon" or "ala".
             i = parse2-->1;
             if (i == YES1__WD or YES2__WD or YES3__WD) rtrue;
             if (i == NO1__WD or NO2__WD or NO3__WD) rfalse;
@@ -1102,7 +1100,7 @@ Include (-
 
 Book - Highlight Suggested Commands
 
-[ Lacking a storied history of toki pona text adventures, the player may struggle to intuit available commands. When suggesting a command to the player, highlighting it in the input style and prefixing it with the command prompt can help get the point across. This functionality isn't really specific to toki pona, but some of this extension's default response substitutions make use of it.
+[ Lacking a storied history of toki pona text adventures, the player may struggle to intuit available commands. When suggesting a command to the player, highlighting it in the input style and prefixing it with the command prompt can help get the point across. This functionality isn't specific to toki pona, but some of this extension's default response substitutions make use of it.
 If you don't like this style, replace the following rule with one that says nothing. ]
 
 Section - Style Suggested Commands Like Input (for use with Glulx Text Effects by Emily Short)
@@ -1125,11 +1123,11 @@ Glyph composition enabled is a truth state that varies. Glyph composition enable
 
 Chapter - Logographic Typesetting
 
-[ [if az] and [if lg] may be useful shorthand if the other substitutions defined here fall short. ]
+[ [if az] and [if lg] may be useful shorthand if other substitutions defined here fall short. ]
 To decide if az: if the current orthography is alphabetic, yes; no.
 To decide if lg: if the current orthography is logographic, yes; no. 
 
-[ sitelen pona looks nicer with more line breaks, so we add this shortcut for optional line breaks that only show up in logographic mode. ]
+[ sitelen pona looks nicer with more line breaks, so this shortcut provides an optional line break that only shows up in logographic mode. ]
 To say lob: say logographic-only break. To say logographic-only break:
 	if the current orthography is logographic:
 		say line break.
@@ -1153,12 +1151,12 @@ To dentally say (T - some text):
 	if the current orthography is logographic:
 		now the current ideographic indentation level is the ideographic length of T.
 
-[ «seme» looks like a question mark already, so it can get confusing if you try to use question marks too. This phrase makes it easy to omit the question mark for «anu seme» questions, like https://oddlingo.github.io/einstein.pdf ]
+[ «seme» looks like a question mark already, which is confusing if you try to use question marks too. This phrase makes it easy to omit the question mark for «anu seme» questions, like https://oddlingo.github.io/einstein.pdf ]
 To say ?: say optional question mark. To say optional question mark:
 	if the current orthography is alphabetic:
 		say "?[no line break]".
 
-[ nasin nanpa uses parentheses for ligatures, so let's add a shortcut for printing parentheses in alphabetic mode, and nothing otherwise. This is only useful if the parentheticality of the enclosed phrase is inessential. ]
+[ nasin nanpa uses parentheses for ligatures, so here's a shortcut for printing parentheses in alphabetic mode, and nothing otherwise. This is only useful if the parentheticality of the enclosed phrase is inessential. ]
 To say optional left parenthesis: 
 	if the current orthography is alphabetic:
 		say "(".
